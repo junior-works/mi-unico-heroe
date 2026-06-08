@@ -1,7 +1,7 @@
 /* Mi único héroe — service worker
    Cache mínimo de shell + glosario. v0.1.0 — bumpear en cada deploy. */
 
-const CACHE_NAME = "muh-shell-v0.2.5";
+const CACHE_NAME = "muh-shell-v0.2.6";
 const PRECACHE = [
   "./",
   "./index.html",
