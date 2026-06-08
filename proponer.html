@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e0d0c">
+<title>Proponer entrada — Mi único héroe</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">·</span>
+    <span class="brand-name">Mi único héroe</span>
+  </a>
+  <nav class="topnav">
+    <a href="glosario.html">Glosario</a>
+    <a href="canciones.html">Canciones</a>
+    <a href="espacios.html">Espacios</a>
+    <a href="tributos.html">Tributos</a>
+    <a href="acerca.html">Acerca</a>
+    <span id="auth-slot"></span>
+  </nav>
+</header>
+
+<main class="pagina">
+  <h1>Proponer entrada al glosario</h1>
+  <p class="lead">Sumá una palabra, frase, lugar, persona o cosa del universo Redondo que falte. Los curadores la revisan y la publican si la fuente está firme.</p>
+
+  <div id="no-login" style="display:none; margin-top: 24px;">
+    <p>Tenés que <a href="acceder.html">iniciar sesión</a> para proponer una entrada.</p>
+  </div>
+
+  <form class="form-grande" id="form-proponer" style="margin-top: 32px; display:none;">
+    <div>
+      <label for="termino">Término *</label>
+      <input type="text" id="termino" maxlength="120" required placeholder="Ej: Mariposa Pontiac">
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div>
+        <label for="tipo">Tipo *</label>
+        <select id="tipo" required>
+          <option value="">Elegí…</option>
+          <option value="lugar">Lugar</option>
+          <option value="figura_historica">Figura histórica</option>
+          <option value="obra_cultural">Obra cultural</option>
+          <option value="evento_historico">Evento histórico</option>
+          <option value="marca">Marca</option>
+          <option value="objeto_material">Objeto material</option>
+          <option value="personaje_de_ficcion">Personaje de ficción</option>
+          <option value="jerga_ricotera">Jerga ricotera</option>
+          <option value="practica_cultural">Práctica cultural</option>
+        </select>
+      </div>
+      <div>
+        <label for="posicion">Posición en la letra</label>
+        <select id="posicion">
+          <option value="">Elegí…</option>
+          <option value="verso">Verso</option>
+          <option value="titulo">Título</option>
+          <option value="titulo_y_verso">Título y verso</option>
+          <option value="coda">Coda / spoken word</option>
+          <option value="pasaje_instrumental">Pasaje instrumental / no es verso</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label for="cancion">Canción</label>
+      <input type="text" id="cancion" maxlength="180" placeholder="Ji Ji Ji">
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 12px;">
+      <div>
+        <label for="disco">Disco</label>
+        <input type="text" id="disco" maxlength="180" placeholder="Oktubre">
+      </div>
+      <div>
+        <label for="anio">Año</label>
+        <input type="number" id="anio" min="1980" max="2030" placeholder="1986">
+      </div>
+    </div>
+
+    <div>
+      <label for="banda">Banda</label>
+      <input type="text" id="banda" maxlength="120" placeholder="Patricio Rey y sus Redonditos de Ricota">
+    </div>
+
+    <div>
+      <label for="verso">Verso exacto donde aparece</label>
+      <textarea id="verso" rows="2" maxlength="500" placeholder="Una noche de cristal que se hace añicos…"></textarea>
+    </div>
+
+    <div>
+      <label for="que-es">Qué es (definición denotativa) *</label>
+      <textarea id="que-es" rows="5" maxlength="1500" required placeholder="Describí qué es en el mundo real. NO interpretes qué quiso decir el Indio."></textarea>
+      <p class="hint">Solo el dato. Ejemplo bueno: "Brigitte Bardot (1934) es actriz francesa, ícono del cine europeo, activista por los derechos de los animales". Ejemplo malo: "El Indio la nombra porque representa la libertad sexual de los 60".</p>
+    </div>
+
+    <div>
+      <label>Fuentes *</label>
+      <p class="hint" style="margin-bottom:8px;">Al menos UNA URL externa que respalde la definición. Mejor dos: una a la letra, una a la enciclopedia o archivo.</p>
+      <div class="fuentes-editor" id="fuentes-editor">
+        <div class="fuente-row">
+          <select class="fuente-tipo-sel">
+            <option value="letra">Letra</option>
+            <option value="enciclopedica" selected>Enciclopedia</option>
+            <option value="fan_critica">Crítica/fan</option>
+            <option value="archivo_periodistico">Archivo periodístico</option>
+            <option value="primaria">Fuente primaria</option>
+          </select>
+          <input type="url" class="fuente-url" placeholder="https://es.wikipedia.org/wiki/…" required>
+          <button type="button" class="quitar" aria-label="Quitar">×</button>
+        </div>
+      </div>
+      <button type="button" id="btn-mas-fuente" class="cta-secondary" style="margin-top: 8px; font-size: .9rem; padding: 8px 14px;">+ Otra fuente</button>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="cta-primary">Enviar para revisión</button>
+    </div>
+    <div id="resultado"></div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
+  <p class="footer-version">v0.2.3</p>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/supa.js"></script>
+<script src="assets/app.js"></script>
+<script>
+function slugify(s) {
+  return String(s).toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 60);
+}
+function leerFuentes() {
+  const rows = document.querySelectorAll(".fuente-row");
+  const out = [];
+  rows.forEach(r => {
+    const url = r.querySelector(".fuente-url").value.trim();
+    const tipo = r.querySelector(".fuente-tipo-sel").value;
+    if (url) out.push({ tipo, url });
+  });
+  return out;
+}
+function agregarFila() {
+  const editor = document.getElementById("fuentes-editor");
+  const row = document.createElement("div");
+  row.className = "fuente-row";
+  row.innerHTML = '<select class="fuente-tipo-sel"><option value="letra">Letra</option><option value="enciclopedica" selected>Enciclopedia</option><option value="fan_critica">Crítica/fan</option><option value="archivo_periodistico">Archivo periodístico</option><option value="primaria">Fuente primaria</option></select><input type="url" class="fuente-url" placeholder="https://…"><button type="button" class="quitar" aria-label="Quitar">×</button>';
+  row.querySelector(".quitar").addEventListener("click", () => row.remove());
+  editor.appendChild(row);
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  MUH.hidratarTopbar();
+  const u = await MUH_SUPA.getUsuarioActual();
+  if (!u) { document.getElementById("no-login").style.display = "block"; return; }
+  document.getElementById("form-proponer").style.display = "grid";
+  document.querySelectorAll(".fuente-row .quitar").forEach(b => b.addEventListener("click", (ev) => ev.target.closest(".fuente-row").remove()));
+  document.getElementById("btn-mas-fuente").addEventListener("click", agregarFila);
+
+  document.getElementById("form-proponer").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const out = document.getElementById("resultado");
+    out.innerHTML = "";
+    const termino = document.getElementById("termino").value.trim();
+    const fuentes = leerFuentes();
+    if (fuentes.length === 0) {
+      out.innerHTML = '<div class="mensaje-error">Necesitás al menos una fuente para proponer la entrada.</div>';
+      return;
+    }
+    try {
+      const payload = {
+        id: slugify(termino) + "_" + Date.now().toString(36),
+        termino,
+        tipo: document.getElementById("tipo").value,
+        cancion: document.getElementById("cancion").value.trim() || null,
+        disco: document.getElementById("disco").value.trim() || null,
+        anio: parseInt(document.getElementById("anio").value, 10) || null,
+        banda: document.getElementById("banda").value.trim() || null,
+        posicion: document.getElementById("posicion").value || null,
+        verso: document.getElementById("verso").value.trim() || null,
+        que_es: document.getElementById("que-es").value.trim(),
+        fuentes
+      };
+      await MUH_SUPA.proponerEntrada(payload);
+      out.innerHTML = '<div class="mensaje-ok"><p style="margin: 0 0 10px;"><strong>Gracias.</strong> La entrada quedó en cola de revisión. Si la fuente está firme, la vemos en el glosario pronto.</p><p style="margin: 0 0 10px; font-size: .92rem;">Si esto te suma valor y querés que el proyecto siga creciendo, podés colaborar. No es obligatorio.</p><div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 8px;"><a class="cta-primary" href="https://cafecito.app/juniorworks" target="_blank" rel="noopener">☕ Cafecito (Argentina)</a><a class="cta-secondary" href="https://ko-fi.com/juniorworks" target="_blank" rel="noopener">🌍 Ko-fi (resto del mundo)</a></div></div>';
+      document.getElementById("form-proponer").reset();
+    } catch (e) {
+      out.innerHTML = '<div class="mensaje-error">No pude enviar: ' + (e.message || "error") + '</div>';
+    }
+  });
+});
+</script>
+</body>
+</html>

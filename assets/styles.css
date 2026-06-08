@@ -1,0 +1,577 @@
+/* =========================================================
+   Mi único héroe — Glosario denotativo del universo redondo
+   Paleta inspirada en los recitales: negro de noche cerrada,
+   blanco ahumado, rojos apagados, dorado bajo. Tipografía
+   con peso y aire — pensada para ser leída, no decorada.
+   ========================================================= */
+
+:root {
+  --ink: #f1ece2;          /* texto principal sobre fondo oscuro */
+  --ink-soft: #b8b0a0;     /* texto secundario */
+  --ink-dim: #7a7367;      /* texto muy secundario */
+  --bg: #0e0d0c;           /* fondo principal */
+  --bg-soft: #1a1816;      /* tarjetas, paneles */
+  --bg-elev: #221f1c;      /* hover y elevación */
+  --border: #2c2823;       /* bordes finos */
+  --accent: #b04830;       /* rojo apagado tipo cartel */
+  --accent-soft: #8c2f1d;
+  --gold: #c6a25a;         /* dorado bajo para acentos */
+  --green: #6c8b5a;
+  --warning: #d6a04a;
+
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow: 0 2px 12px rgba(0,0,0,.35);
+  --shadow-soft: 0 1px 4px rgba(0,0,0,.25);
+
+  --container: 1100px;
+  --container-narrow: 760px;
+
+  --font-display: "EB Garamond", "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg { max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--gold); }
+
+p { margin: 0 0 1em; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  margin: 0 0 .6em;
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-top: 1.4em; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.05rem; }
+
+strong { font-weight: 600; color: var(--ink); }
+em { font-style: italic; color: var(--ink); }
+
+/* ----- Topbar ----- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(14, 13, 12, .92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.brand-mark {
+  color: var(--accent);
+  font-size: 1.6rem;
+  line-height: 0.5;
+}
+
+.brand:hover { color: var(--gold); }
+
+.topnav {
+  display: flex;
+  gap: 20px;
+  font-size: .92rem;
+}
+
+.topnav a {
+  color: var(--ink-soft);
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+
+.topnav a:hover,
+.topnav a.active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* ----- Home ----- */
+.home {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+}
+
+.hero { max-width: var(--container-narrow); margin-bottom: 80px; }
+.hero-eyebrow {
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ink-dim);
+  margin-bottom: 1.2em;
+}
+.hero-title { color: var(--ink); }
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  max-width: 620px;
+}
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.cta-primary,
+.cta-secondary {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  font-size: .96rem;
+  letter-spacing: .01em;
+  transition: background .15s, border-color .15s, transform .1s;
+}
+.cta-primary {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+.cta-primary:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-soft);
+  color: #fff;
+}
+.cta-secondary {
+  border: 1px solid var(--border);
+  color: var(--ink);
+  background: transparent;
+}
+.cta-secondary:hover {
+  background: var(--bg-soft);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ----- Stats ----- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 80px;
+  padding: 36px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stat { text-align: left; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: .88rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* ----- Método ----- */
+.metodo {
+  max-width: var(--container-narrow);
+  margin-bottom: 80px;
+}
+.metodo h2 { color: var(--ink); }
+.metodo p { color: var(--ink-soft); font-size: 1.05rem; }
+
+/* ----- Muestra (home cards) ----- */
+.muestra h2 { color: var(--ink); }
+.muestra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.muestra-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 22px 26px;
+  transition: border-color .15s, background .15s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+}
+.muestra-card:hover {
+  background: var(--bg-elev);
+  border-color: var(--gold);
+}
+.muestra-card-term {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.muestra-card-tipo {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.muestra-card-cancion {
+  font-size: .92rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-top: auto;
+}
+.muestra-skeleton {
+  background: linear-gradient(90deg, var(--bg-soft) 0%, var(--bg-elev) 50%, var(--bg-soft) 100%);
+  background-size: 200% 100%;
+  animation: skel 1.2s infinite linear;
+}
+@keyframes skel {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ----- Glosario (listado) ----- */
+.glosario {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.glosario-header {
+  margin-bottom: 28px;
+}
+.glosario-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: .3em;
+}
+.glosario-header .lead {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.filtros {
+  display: grid;
+  grid-template-columns: 1fr 220px 220px 160px;
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 16px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+@media (max-width: 760px) {
+  .filtros { grid-template-columns: 1fr 1fr; }
+  .filtros .filtro-buscar { grid-column: 1 / -1; }
+}
+
+.filtro-buscar input,
+.filtros select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: .95rem;
+}
+.filtro-buscar input:focus,
+.filtros select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.contador-resultados {
+  font-size: .88rem;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+.entradas-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.entrada-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  cursor: pointer;
+  transition: border-color .12s, background .12s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.entrada-card:hover {
+  background: var(--bg-elev);
+  border-color: var(--gold);
+}
+.entrada-card .tipo-tag {
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--gold);
+}
+.entrada-card .termino {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.entrada-card .cancion {
+  font-size: .9rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.entrada-card .resumen {
+  font-size: .92rem;
+  color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.entrada-card .confianza-media {
+  display: inline-block;
+  font-size: .7rem;
+  color: var(--warning);
+  background: rgba(214, 160, 74, .08);
+  border: 1px solid rgba(214, 160, 74, .35);
+  padding: 2px 8px;
+  border-radius: 999px;
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* ----- Modal detalle entrada ----- */
+.modal-back {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .72);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s;
+}
+.modal-back.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 720px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 32px;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform .18s;
+}
+.modal-back.open .modal { transform: translateY(0); }
+
+.modal-cerrar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink-soft);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: border-color .15s, color .15s;
+}
+.modal-cerrar:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.modal h2 {
+  color: var(--ink);
+  margin-top: 0;
+  margin-bottom: .2em;
+  padding-right: 40px;
+}
+.modal .modal-tipo {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--gold);
+  margin-bottom: 22px;
+}
+.modal section { margin-bottom: 22px; }
+.modal section h4 {
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ink-dim);
+  margin: 0 0 6px;
+}
+.modal .verso {
+  font-style: italic;
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
+  margin: 8px 0;
+}
+.modal .que-es {
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+.modal .fuentes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.modal .fuentes li {
+  margin-bottom: 8px;
+  font-size: .92rem;
+}
+.modal .fuentes a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-color: rgba(198, 162, 90, .35);
+}
+.modal .fuentes a:hover { text-decoration-color: var(--gold); }
+.modal .fuentes .fuente-tipo {
+  font-size: .72rem;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-right: 8px;
+}
+
+.modal .confianza-media-banner {
+  background: rgba(214, 160, 74, .08);
+  border: 1px solid rgba(214, 160, 74, .35);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: .9rem;
+  color: var(--warning);
+  margin-bottom: 22px;
+}
+
+/* ----- Canciones (listado) ----- */
+.canciones-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 14px;
+}
+.cancion-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: border-color .12s, background .12s;
+  cursor: pointer;
+}
+.cancion-card:hover {
+  border-color: var(--gold);
+  background: var(--bg-elev);
+}
+.cancion-card .titulo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.cancion-card .meta {
+  font-size: .85rem;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+.cancion-card .meta .disco { font-style: italic; }
+.cancion-card .meta .banda { color: var(--ink-dim); }
+.cancion-card .refs {
+  font-size: .82rem;
+  color: var(--gold);
+}
+
+/* ----- Footer ----- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  padding: 36px 20px;
+  text-align: center;
+  font-size: .82rem;
+  color: var(--ink-dim);
+  max-width: var(--container);
+  margin: 60px auto 0;
+}
+.site-footer p { margin: 0 auto .6em; max-width: 640px; }
+.footer-version {
+  font-size: .72rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* ----- Acerca ----- */
+.pagina {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+}
+.pagina h1 { color: var(--ink); margin-bottom: .4em; }
+.pagina p { color: var(--ink-soft); font-size: 1.05rem; }
+.pagina h2 { color: var(--ink); }
+
+/* ----- Auth slot en topbar ----- */
+#auth-slot {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: .9rem;
+  color: var(--ink-soft);
+}
+#auth-slot a { col

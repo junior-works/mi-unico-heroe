@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e0d0c">
+<title>Proponer banda tributo — Mi único héroe</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">·</span>
+    <span class="brand-name">Mi único héroe</span>
+  </a>
+  <nav class="topnav">
+    <a href="glosario.html">Glosario</a>
+    <a href="canciones.html">Canciones</a>
+    <a href="espacios.html">Espacios</a>
+    <a href="tributos.html" class="active">Tributos</a>
+    <a href="acerca.html">Acerca</a>
+    <span id="auth-slot"></span>
+  </nav>
+</header>
+
+<main class="pagina">
+  <h1>Proponer banda tributo</h1>
+  <p class="lead">Sumá una banda tributo de tu ciudad o de cualquier lugar del mundo. La cargamos para que otros ricoteros la encuentren cuando viajen o estén cerca. Los curadores aprueban antes de publicar.</p>
+
+  <div id="no-login" style="display:none; margin-top: 24px;">
+    <p>Tenés que <a href="acceder.html">iniciar sesión</a> para proponer un tributo.</p>
+  </div>
+
+  <form class="form-grande" id="form-tributo" style="margin-top: 32px; display:none;">
+    <div>
+      <label for="nombre">Nombre de la banda *</label>
+      <input type="text" id="nombre" required maxlength="100">
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div>
+        <label for="pais">País *</label>
+        <input type="text" id="pais" required maxlength="60">
+      </div>
+      <div>
+        <label for="ciudad">Ciudad *</label>
+        <input type="text" id="ciudad" required maxlength="60">
+      </div>
+    </div>
+    <div>
+      <label for="descripcion">Descripción (opcional)</label>
+      <textarea id="descripcion" rows="3" maxlength="500" placeholder="Tocan principalmente Oktubre y Luzbelito. Activos desde 2018."></textarea>
+    </div>
+    <div>
+      <label for="instagram">Instagram (opcional)</label>
+      <input type="url" id="instagram" placeholder="https://instagram.com/...">
+    </div>
+    <div>
+      <label for="facebook">Facebook (opcional)</label>
+      <input type="url" id="facebook" placeholder="https://facebook.com/...">
+    </div>
+    <div>
+      <label for="youtube">YouTube (opcional)</label>
+      <input type="url" id="youtube" placeholder="https://youtube.com/...">
+    </div>
+    <div>
+      <label for="contacto">Email de contacto (opcional)</label>
+      <input type="email" id="contacto">
+    </div>
+    <div class="actions">
+      <button type="submit" class="cta-primary">Enviar para revisión</button>
+    </div>
+    <div id="resultado"></div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
+  <p class="footer-version">v0.2.3</p>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/supa.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  MUH.hidratarTopbar();
+  const u = await MUH_SUPA.getUsuarioActual();
+  if (!u) { document.getElementById("no-login").style.display = "block"; return; }
+  document.getElementById("form-tributo").style.display = "grid";
+  document.getElementById("form-tributo").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const out = document.getElementById("resultado");
+    out.innerHTML = "";
+    try {
+      await MUH_SUPA.proponerTributo({
+        nombre: document.getElementById("nombre").value.trim(),
+        pais: document.getElementById("pais").value.trim(),
+        ciudad: document.getElementById("ciudad").value.trim(),
+        descripcion: document.getElementById("descripcion").value.trim() || null,
+        instagram_url: document.getElementById("instagram").value.trim() || null,
+        facebook_url: document.getElementById("facebook").value.trim() || null,
+        youtube_url: document.getElementById("youtube").value.trim() || null,
+        contacto_email: document.getElementById("contacto").value.trim() || null
+      });
+      out.innerHTML = `
+        <div class="mensaje-ok">
+          <p style="margin: 0 0 10px;"><strong>Gracias.</strong> Lo dejamos en cola para que un curador lo apruebe.</p>
+          <p style="margin: 0 0 10px; font-size: .92rem;">Este espacio es 100% gratuito. Si te suma podés colaborar — tu banda aparece igual.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 8px;">
+            <a class="cta-primary" href="https://cafecito.app/juniorworks" target="_blank" rel="noopener">☕ Cafecito (Argentina)</a>
+            <a class="cta-secondary" href="https://ko-fi.com/juniorworks" target="_blank" rel="noopener">🌍 Ko-fi (resto del mundo)</a>
+          </div>
+        </div>
+      `;
+      document.getElementById("form-tributo").reset();
+    } catch (e) {
+      out.innerHTML = '<div class="mensaje-error">No pude enviar: ' + (e.message || "error") + '</div>';
+    }
+  });
+});
+</script>
+</body>
+</html>

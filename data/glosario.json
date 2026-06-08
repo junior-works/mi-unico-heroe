@@ -1,0 +1,1380 @@
+{
+  "version": "0.1.0",
+  "generado": "2026-06-09",
+  "metodo": "Glosario denotativo verificado, no interpretativo. Cada entrada con verso citable y al menos una fuente externa.",
+  "regla_oro": "No tirar fruta. Si una referencia no aparece en una letra real con verso citable y al menos una fuente externa verificable, NO entra.",
+  "stats": {
+    "total_entradas": 48,
+    "por_confianza": {
+      "alta": 46,
+      "media": 2
+    },
+    "por_tipo": {
+      "personaje_de_ficcion": 2,
+      "lugar": 7,
+      "obra_cultural": 4,
+      "evento_historico": 5,
+      "figura_historica": 6,
+      "marca": 16,
+      "objeto_material": 1,
+      "jerga_ricotera": 4,
+      "practica_cultural": 3
+    },
+    "por_disco": {
+      "Gulp!": 5,
+      "Oktubre": 6,
+      "Momo Sampler": 4,
+      "La Mosca y la Sopa": 5,
+      "Pajaritos, bravos muchachitos": 1,
+      "El perfume de la tempestad": 1,
+      "Lobo Suelto, Cordero Atado (Vol. 1 y 2)": 1,
+      "Último Bondi a Finisterre": 2,
+      "¡Bang! ¡Bang!... Estás Liquidado": 2,
+      "El Ruiseñor, el Amor y la Muerte": 1,
+      "Luzbelito": 4,
+      "El Tesoro de los Inocentes (Bingo Fuel)": 8,
+      "(no es de una canción específica)": 2,
+      "Un Baión para el Ojo Idiota": 2,
+      "Lobo Suelto / Cordero Atado": 2,
+      "(no aplica)": 2
+    }
+  },
+  "entradas": [
+    {
+      "id": "barbazul",
+      "termino": "Barbazul",
+      "tipo": "personaje_de_ficcion",
+      "aparece_en": {
+        "cancion": "Barbazul versus el amor letal",
+        "disco": "Gulp!",
+        "anio": 1985,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "Del dios Barbazul de esta prisión"
+      },
+      "que_es": "Personaje del cuento La Barbe bleue de Charles Perrault, publicado en 1697 en Histoires ou contes du temps passé. Noble adinerado que asesina sucesivamente a sus esposas y oculta los cadáveres en una habitación prohibida de su castillo. La figura ha sido vinculada históricamente al noble bretón Gilles de Rais (siglo XV).",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202117/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Barba_Azul"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://interzonaeditora.com/admin/files/libros/228/LacuadraturaMUESTRA.pdf",
+          "descripcion": "Magnus, La cuadratura de la redondez (interZona 2011), p.21, identifica explícitamente la alusión a Perrault"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "luna_park",
+      "termino": "Luna Park",
+      "tipo": "lugar",
+      "aparece_en": {
+        "cancion": "La Bestia Pop",
+        "disco": "Gulp!",
+        "anio": 1985,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Voy a bailar el rock del rico Luna Park / Y atomizar la butaca y brillar"
+      },
+      "que_es": "Estadio cubierto multipropósito de Buenos Aires, en la esquina de Av. Corrientes y Av. Bouchard, barrio de San Nicolás. Inaugurado en 1932 por Ismael Pace y José 'Pepe' Lectoure como Catedral del Boxeo; ampliado en los 50 para shows y conciertos. Declarado Monumento Histórico Nacional el 15 de febrero de 2007.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202066/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Estadio_Luna_Park"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://interzonaeditora.com/admin/files/libros/228/LacuadraturaMUESTRA.pdf",
+          "descripcion": "Magnus, La cuadratura de la redondez, p.27"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "sigmund_romberg_the_new_moon",
+      "termino": "Sigmund Romberg / 'Softly, as in a Morning Sunrise'",
+      "tipo": "obra_cultural",
+      "aparece_en": {
+        "cancion": "La Bestia Pop",
+        "disco": "Gulp!",
+        "anio": 1985,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "pasaje_instrumental",
+        "verso": "(saxo de Willy Crook en el cierre del tema)"
+      },
+      "que_es": "Sigmund Romberg (1887-1951) fue compositor húngaro-estadounidense de operetas y musicales. 'Softly, as in a Morning Sunrise' es una canción que compuso con letra de Oscar Hammerstein II para la opereta The New Moon, estrenada en Broadway en 1928. Esta melodía es la que el saxo de Willy Crook interpola al final de 'La Bestia Pop'. La atribución popular a Lawrence of Arabia (1962) de Maurice Jarre es errónea — confusión recurrente que la propia banda y críticos han desmentido.",
+      "contemporaneidad": "Fuente original 1928; Gulp! 1985",
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202066/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Sigmund_Romberg"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://operetta-research-center.org/new-moon-romantic-musical-play-sigmund-romberg/"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "http://frodorock.blogspot.com/2016/05/plagio-di-plagio-v-la-bestia-softly.html",
+          "descripcion": "Análisis del cruce musical"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "kristallnacht",
+      "termino": "Kristallnacht (Noche de los Cristales Rotos)",
+      "tipo": "evento_historico",
+      "aparece_en": {
+        "cancion": "Ji Ji Ji",
+        "disco": "Oktubre",
+        "anio": 1986,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Una noche de cristal que se hace añicos"
+      },
+      "que_es": "Pogromo nazi contra la población judía de Alemania y Austria realizado el 9 y 10 de noviembre de 1938 por las SA y SS con participación civil. Se incendiaron más de 1.400 sinagogas, fueron vandalizados unos 7.500 comercios judíos, fueron asesinadas o llevadas al suicidio aproximadamente 400 personas y unos 30.000 hombres judíos fueron arrestados y deportados a campos de concentración.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203003/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://encyclopedia.ushmm.org/content/en/article/kristallnacht",
+          "descripcion": "USHMM, Museo del Holocausto"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Kristallnacht"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "chernobil",
+      "termino": "Chernóbil",
+      "tipo": "evento_historico",
+      "aparece_en": {
+        "cancion": "Ji Ji Ji",
+        "disco": "Oktubre",
+        "anio": 1986,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "coda",
+        "verso": "Olga Sudorova / Vodka de Chernobyl / ¡Pobre la Olga! ¡Crepó!"
+      },
+      "que_es": "Ciudad del norte de Ucrania (entonces RSS de Ucrania, URSS) donde el 26 de abril de 1986 explotó el reactor 4 de la Central Nuclear de Chernóbil. Es el accidente nuclear más grave de la historia civil (nivel 7 INES). El disco Oktubre se grabó y editó ese mismo año.",
+      "contemporaneidad": "Accidente abril 1986; Oktubre editado el mismo año",
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203003/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Accidente_de_Chern%C3%B3bil"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "brigitte_bardot",
+      "termino": "Brigitte Bardot",
+      "tipo": "figura_historica",
+      "aparece_en": {
+        "cancion": "Un tal Brigitte Bardot",
+        "disco": "Oktubre",
+        "anio": 1986,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "Un tal Brigitte Bardot"
+      },
+      "que_es": "Actriz, cantante y modelo francesa nacida el 28 de septiembre de 1934 en París. Ícono sexual del cine europeo de los años 50 y 60 (Et Dieu… créa la femme, 1956). Desde 1973 abandonó el cine para dedicarse al activismo por los derechos de los animales (Fundación Brigitte Bardot, 1986).",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/un-tal-brigitte-bardot/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Brigitte_Bardot"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "caryl_chessman",
+      "termino": "Caryl Chessman",
+      "tipo": "figura_historica",
+      "aparece_en": {
+        "cancion": "Un tal Brigitte Bardot",
+        "disco": "Oktubre",
+        "anio": 1986,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Viejo Caryl Chessman / Respirá otra vez / Ya llegó la hora, lubricá tus branquias / Respirá otra vez"
+      },
+      "que_es": "Delincuente y escritor estadounidense (1921-1960), condenado a muerte en California en 1948 bajo la 'ley Little Lindbergh' por una serie de asaltos sexuales (caso del 'Red Light Bandit'). Ejecutado en la cámara de gas de la prisión de San Quintín el 2 de mayo de 1960 tras doce años de apelaciones. Escribió cuatro libros en el corredor de la muerte, incluido Cell 2455, Death Row (1954). Su caso internacionalizó el debate contra la pena capital en EEUU (apelaron Aldous Huxley, Ray Bradbury, Marlon Brando, Eleanor Roosevelt).",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/un-tal-brigitte-bardot/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Caryl_Chessman"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://www.britannica.com/biography/Chessman-Caryl"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "mao_zedong",
+      "termino": "Mao Zedong",
+      "tipo": "figura_historica",
+      "aparece_en": {
+        "cancion": "El Regreso de Mao",
+        "disco": "Oktubre",
+        "anio": 1986,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "Se adelantó el regreso de Mao / El hijo de Mao, el Mao blanco"
+      },
+      "que_es": "Mao Zedong (1893-1976), líder del Partido Comunista de China, fundador de la República Popular China el 1 de octubre de 1949, impulsor del Gran Salto Adelante y la Revolución Cultural. Murió el 9 de septiembre de 1976.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/196015/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Mao_Zedong"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "sendero_luminoso",
+      "termino": "Sendero Luminoso",
+      "tipo": "evento_historico",
+      "aparece_en": {
+        "cancion": "El Regreso de Mao",
+        "disco": "Oktubre",
+        "anio": 1986,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Sendero Luminoso, Laca Cristalina / Que adelantó el regreso de Mao"
+      },
+      "que_es": "Partido Comunista del Perú – Sendero Luminoso, organización guerrillera maoísta fundada en 1969 en Ayacucho por Abimael Guzmán ('Presidente Gonzalo'). Inició la lucha armada el 17 de mayo de 1980 ('Inicio de la Lucha Armada', ILA) y mantuvo un conflicto interno en Perú durante los 80 y 90. Guzmán fue capturado el 12 de septiembre de 1992.",
+      "contemporaneidad": "Oktubre 1986: Sendero estaba en fase de máxima actividad",
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/196015/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Sendero_Luminoso"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "citroen_mehari",
+      "termino": "Citroën Méhari",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Una Piba con la Remera de Greenpeace",
+        "disco": "Momo Sampler",
+        "anio": 2000,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Nunca supo buscarse la vida / Su cuna fueron restos de un Méhari"
+      },
+      "que_es": "Automóvil utilitario descapotable fabricado por Citroën entre 1968 y 1988. Presentado el 16 de mayo de 1968 en el club de golf de Deauville. Diseñado por Roland de la Poype (as de la aviación de la Francia Libre en la Segunda Guerra Mundial). Carrocería de plástico ABS sobre chasis de los Citroën serie A, motor bicilíndrico de 602 cc compartido con el 2CV6. Se produjeron 144.953 unidades.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203052/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Citro%C3%ABn_M%C3%A9hari"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.media.stellantis.com/es-es/citroen/press/citroen-mehari-55-anos-y-sigue-inspirando"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "greenpeace",
+      "termino": "Greenpeace",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Una Piba con la Remera de Greenpeace",
+        "disco": "Momo Sampler",
+        "anio": 2000,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo",
+        "verso": "(la palabra aparece solo en el título; el cuerpo de la letra describe a 'la piba')"
+      },
+      "que_es": "ONG ambientalista internacional fundada en septiembre de 1971 en Vancouver, Canadá. Su primera acción fue una expedición a la isla Amchitka (Alaska) para protestar contra una prueba nuclear estadounidense. Sede en Ámsterdam, opera en más de 55 países.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203052/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Greenpeace"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "detroit_robocop",
+      "termino": "Detroit / RoboCop",
+      "tipo": "obra_cultural",
+      "aparece_en": {
+        "cancion": "Fusilados por la Cruz Roja",
+        "disco": "La Mosca y la Sopa",
+        "anio": 1991,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Te encanará un robocop sin ley / Un crono-rock japolicía hecho en detroit"
+      },
+      "que_es": "Detroit es la ciudad del estado de Míchigan (EEUU), capital histórica de la industria automotriz norteamericana (Ford, General Motors, Chrysler). RoboCop es una película de ciencia ficción de 1987 dirigida por Paul Verhoeven (guion de Edward Neumeier y Michael Miner), ambientada en un Detroit futuro arrasado por el crimen: el oficial Alex Murphy es asesinado y resucitado como cyborg policial por Omni Consumer Products. La primera secuela es de 1990. La Mosca y la Sopa se grabó en 1991 — contemporaneidad estricta con la franquicia.",
+      "contemporaneidad": "RoboCop (1987) + RoboCop 2 (1990); disco 1991",
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202999/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/RoboCop"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.imdb.com/title/tt0093870/"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "ken_kesey",
+      "termino": "Ken Kesey",
+      "tipo": "figura_historica",
+      "aparece_en": {
+        "cancion": "Ken Kesey (Scherzo)",
+        "disco": "Pajaritos, bravos muchachitos",
+        "anio": 2013,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "titulo_y_verso",
+        "verso": "¡Ay! ¡Los secuaces de Kesey! / ¡Ay! ¡Esos pillos jodones! / ¡Ay! ¡Esos bromistas joviales!"
+      },
+      "que_es": "Ken Kesey (17 de septiembre de 1935, La Junta, Colorado – 10 de noviembre de 2001, Eugene, Oregon). Escritor estadounidense, autor de One Flew Over the Cuckoo's Nest (1962), base de Atrapado sin salida (1975, Miloš Forman). Participó como voluntario en un estudio sobre psicoactivos financiado por la CIA en Stanford (Proyecto MKUltra) que le dio acceso al LSD. Líder de los Merry Pranksters, grupo contracultural que en 1964 atravesó EEUU en un bus escolar Day-Glo realizando los Acid Tests. Figura central del nacimiento de la contracultura psicodélica.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/ken-kesey-scherzo/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://www.britannica.com/biography/Ken-Kesey"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Merry_Pranksters"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "vin_mariani",
+      "termino": "Vin Mariani",
+      "tipo": "objeto_material",
+      "aparece_en": {
+        "cancion": "Vino Mariani",
+        "disco": "El perfume de la tempestad",
+        "anio": 2010,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "titulo",
+        "verso": "(referencia explícita en el título; la palabra 'Mariani' no aparece en el cuerpo)"
+      },
+      "que_es": "Bebida tónica creada en 1863 por el químico corso Angelo Mariani. Mezcla de vino de Burdeos con hojas de coca. Al reaccionar el alcohol con la cocaína producía etilencoca, compuesto estimulante. Fue legal hasta 1914. Bebida favorita del Papa León XIII (que premió a Mariani con una medalla de oro vaticana), el Papa Pío X, la Reina Victoria, el zar Alejandro II, Ulysses S. Grant, Arthur Conan Doyle, Julio Verne, Émile Zola, Paul Verlaine y Mark Twain.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/1838629/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Vin_Mariani"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.directoalpaladar.com/cultura-gastronomica/historia-vino-mariani-burdeos-coca-que-conquisto-al-vaticano"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "carcel_caseros",
+      "termino": "Caseros (Cárcel de Caseros)",
+      "tipo": "lugar",
+      "aparece_en": {
+        "cancion": "El Pibe de los Astilleros",
+        "disco": "La Mosca y la Sopa",
+        "anio": 1991,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Fue unos meses a Caseros y su Strato roja"
+      },
+      "que_es": "Referencia a la Cárcel de Caseros, el penal panóptico del barrio de Parque Patricios (Ciudad de Buenos Aires) inaugurado el 23 de abril de 1979 durante la dictadura de Videla. Fue la cárcel más grande de Latinoamérica (dos torres de 22 pisos, 85.000 m² cubiertos, 2.096 celdas individuales). En lunfardo y jerga porteña, 'ir a Caseros' significa 'ir preso'. Cerró en 2001 y se demolió parcialmente en 2007.",
+      "contemporaneidad": "La Mosca y la Sopa 1991; cárcel nueva operativa entonces",
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202680/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/C%C3%A1rcel_de_Caseros"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "concordia",
+      "termino": "Concordia",
+      "tipo": "lugar",
+      "aparece_en": {
+        "cancion": "El Pibe de los Astilleros",
+        "disco": "La Mosca y la Sopa",
+        "anio": 1991,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Una linda damita de Concordia"
+      },
+      "que_es": "Ciudad de la provincia de Entre Ríos, Argentina, sobre el margen derecho del río Uruguay, frente a la ciudad uruguaya de Salto. Segunda ciudad de Entre Ríos por población (después de Paraná), a unos 430 km al norte de Buenos Aires. Capital Nacional del Citrus desde 1963. Fundada en 1831-1832 como Villa de la Concordia.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202680/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Concordia_(Argentina)"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "fender_stratocaster",
+      "termino": "Fender Stratocaster ('Strato roja')",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "El Pibe de los Astilleros",
+        "disco": "La Mosca y la Sopa",
+        "anio": 1991,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Fue unos meses a Caseros y su Strato roja"
+      },
+      "que_es": "'Strato' es la forma abreviada coloquial de la Fender Stratocaster, modelo de guitarra eléctrica solid-body fabricado por Fender Musical Instruments Corporation (EEUU) desde 1954. Diseñada por Leo Fender, George Fullerton y Freddie Tavares, es uno de los modelos más imitados de la historia del rock. Existe en múltiples acabados de fábrica, entre ellos rojos como 'Fiesta Red' y 'Candy Apple Red'.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202680/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Fender_Stratocaster"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "ford_f100",
+      "termino": "Ford F-100",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "El Templo de Momo",
+        "disco": "Lobo Suelto, Cordero Atado (Vol. 1 y 2)",
+        "anio": 1993,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Le dan a la F-100 a toda mostaza"
+      },
+      "que_es": "La Ford F-100 es una pick-up de carga liviana fabricada por Ford Motor Company, parte de la familia F-Series lanzada en 1948 en EEUU. En Argentina fue producida por Ford Motor Argentina en la planta de General Pacheco desde 1961 hasta 1999 con varias generaciones. Es una de las pick-ups más populares en la cultura rural y de trabajo argentina del siglo XX.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202991/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Ford_F-Series"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "buscapina",
+      "termino": "Buscapina",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Las Increíbles Andanzas del Capitán Buscapina en Cybersiberia",
+        "disco": "Último Bondi a Finisterre",
+        "anio": 1998,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "El Capitán Buscapina salda deudas"
+      },
+      "que_es": "Buscapina es el nombre comercial de un antiespasmódico cuyo principio activo es la butilescopolamina (derivado de planta del género Duboisia). Fabricado por el laboratorio alemán Boehringer Ingelheim, lanzado comercialmente en 1951. Se usa para tratar cólicos abdominales, biliares, urinarios y otros espasmos del músculo liso. En Argentina es marca masiva de venta libre.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202691/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://www.cun.es/enfermedades-tratamientos/medicamentos/butilescopolamina"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "pincha_canallas",
+      "termino": "Pincha y Canallas",
+      "tipo": "jerga_ricotera",
+      "aparece_en": {
+        "cancion": "Las Increíbles Andanzas del Capitán Buscapina en Cybersiberia",
+        "disco": "Último Bondi a Finisterre",
+        "anio": 1998,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Donde se matan, hoy, el Pincha y los Canallas"
+      },
+      "que_es": "'Pincha' (forma corta de 'Pincharrata') es el apodo de la hinchada y el club Estudiantes de La Plata. El origen más difundido lo atribuye a Felipe Montedónica, olavarriense radicado en La Plata, empleado del Mercado Regional, que junto a su hermano pinchaba ratas con un tridente; siendo hincha del club, el mote se extendió a la afición. 'Canallas' es el apodo de la hinchada de Rosario Central (Rosario, Santa Fe). Surge a comienzos del siglo XX cuando el club rechazó participar en un partido a beneficio del Hospital Carrasco (al que sí asistió Newell's Old Boys), gesto considerado 'egoísta' o 'canalla'. Ambos apodos pasaron de insulto a marca identitaria.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202691/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Club_Estudiantes_de_La_Plata"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://billiken.lat/saber-mas/por-que-a-estudiantes-de-la-plata-se-le-dice-pincharrata/"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "pac_man",
+      "termino": "Pac-Man",
+      "tipo": "obra_cultural",
+      "aparece_en": {
+        "cancion": "Un Pac-Man en el Savoy",
+        "disco": "¡Bang! ¡Bang!... Estás Liquidado",
+        "anio": 1989,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "La bobera del nuevo Pacman"
+      },
+      "que_es": "Videojuego arcade de laberinto diseñado por Toru Iwatani y desarrollado y publicado por Namco. Lanzado en Japón el 22 de mayo de 1980 (título original Puck Man) y distribuido en Norteamérica por Midway Manufacturing en agosto de 1980. En el primer año vendió más de 100.000 unidades. El personaje protagonista come puntos en un laberinto perseguido por cuatro fantasmas.",
+      "contemporaneidad": "Pac-Man 1980; disco 1989",
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203050/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Pac-Man"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "savoy_la_plata",
+      "termino": "Savoy (supermercado de La Plata)",
+      "tipo": "lugar",
+      "aparece_en": {
+        "cancion": "Un Pac-Man en el Savoy",
+        "disco": "¡Bang! ¡Bang!... Estás Liquidado",
+        "anio": 1989,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo",
+        "verso": "(referencia en el título)"
+      },
+      "que_es": "Supermercado llamado 'Savoy' que existió en la zona de Plaza Italia, ciudad de La Plata (provincia de Buenos Aires). Su propietario era un hombre llamado Aníbal, jugador habitual de carreras de caballos. La referencia es local y platense, NO al Hotel Savoy de Londres ni al de Buenos Aires. El Indio y los integrantes originales de la banda vivían en La Plata en la época de composición.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203050/"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203050/significado.html"
+        }
+      ],
+      "confianza": "media"
+    },
+    {
+      "id": "malleus_maleficarum",
+      "termino": "Malleus Maleficarum",
+      "tipo": "obra_cultural",
+      "aparece_en": {
+        "cancion": "El Martillo de las Brujas (Malleus Maleficarum)",
+        "disco": "El Ruiseñor, el Amor y la Muerte",
+        "anio": 2018,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "titulo",
+        "verso": "(subtítulo entre paréntesis del título)"
+      },
+      "que_es": "Tratado en latín publicado en 1486 (algunas ediciones consignan 1487) por los inquisidores dominicos Heinrich Kramer y Jacob Sprenger, encargado por el papa Inocencio VIII. Su título se traduce como 'El Martillo de las Brujas'. Funcionó durante aproximadamente dos siglos como manual oficial para detectar, juzgar, torturar y castigar a personas acusadas de brujería en la Europa católica y protestante. Es el documento más influyente del proceso de caza de brujas en el Renacimiento europeo.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/el-martillo-de-las-brujas/"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://historia.nationalgeographic.com.es/a/biblia-cazadores-brujas-malleus-maleficarum_17820"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "gualicho",
+      "termino": "Gualicho",
+      "tipo": "jerga_ricotera",
+      "aparece_en": {
+        "cancion": "Gualicho",
+        "disco": "Luzbelito",
+        "anio": 1996,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "(canción homónima)"
+      },
+      "que_es": "Palabra del español rioplatense, de origen mapuche/tehuelche ('gualichu'), que designaba originalmente a un espíritu maligno o demonio en la mitología tehuelche y mapuche. Por extensión pasó a significar 'hechizo dañino, maleficio, brujería' — específicamente del tipo usado para amarres amorosos, ruptura de parejas o daño dirigido a una persona. La palabra sobrevive como sustantivo y verbo ('gualichar') en el folclore popular de Argentina, Chile, sur de Brasil y Uruguay.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203001/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Gualichu"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "limon_agudelo",
+      "termino": "Limón (Álvaro de Jesús Agudelo)",
+      "tipo": "figura_historica",
+      "aparece_en": {
+        "cancion": "Me Matan, Limón!",
+        "disco": "Luzbelito",
+        "anio": 1996,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "Me matan, Limón!"
+      },
+      "que_es": "'Limón' fue el alias de Álvaro de Jesús Agudelo, último guardaespaldas de Pablo Escobar Gaviria. Lo acompañaba el 2 de diciembre de 1993, cuando ambos fueron abatidos en el techo de una vivienda en el barrio Los Olivos de Medellín por el Bloque de Búsqueda de la Policía Nacional de Colombia (organizado para capturar a Escobar). La canción reconstruye los últimos minutos de Escobar dirigiéndose a 'Limón' mientras los persiguen por los techos.",
+      "contemporaneidad": "Operativo 2 de diciembre de 1993; disco Luzbelito 1996",
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202690/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Me_matan,_Lim%C3%B3n!"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "blockbuster",
+      "termino": "Blockbuster",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "La Piba de Blockbuster",
+        "disco": "El Tesoro de los Inocentes (Bingo Fuel)",
+        "anio": 2004,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "titulo_y_verso",
+        "verso": "La piba del blockbuster"
+      },
+      "que_es": "Blockbuster Inc. fue una cadena estadounidense de alquiler de películas en VHS y DVD fundada en 1985 en Dallas, Texas, por David Cook. Llegó a tener más de 9.000 locales en el mundo. Operó en Argentina entre 1995 y 2004-2005, con locales en CABA y Gran Buenos Aires. La empresa quebró globalmente en 2010.",
+      "contemporaneidad": "El disco es de 2004, momento de cierre de Blockbuster Argentina",
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/203949/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Blockbuster_LLC"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "pogo",
+      "termino": "Pogo",
+      "tipo": "practica_cultural",
+      "aparece_en": {
+        "cancion": "(práctica metalingüística del fandom)",
+        "disco": "(no es de una canción específica)",
+        "anio": null,
+        "banda": null,
+        "posicion": "pasaje_instrumental",
+        "verso": "(no aparece como verso lírico; es práctica colectiva en los recitales)"
+      },
+      "que_es": "Baile colectivo nacido con el movimiento punk en Londres en los años 70 (frecuentemente atribuido a Sid Vicious de los Sex Pistols como popularizador). Los participantes saltan en el lugar y chocan entre sí imitando el salto de un 'pogo stick' (juguete patentado en 1920 por Max Pohling y Ernst Gottschal, cuyos apellidos forman la palabra 'po-go'). En la cultura ricotera argentina el pogo se transformó en una práctica masiva — el Indio Solari acuñó la categoría del 'pogo más grande del mundo / del universo' en sus recitales (Tandil, 27 de noviembre de 2010).",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.lanacion.com.ar/sociedad/quien-invento-el-pogo-y-de-donde-viene-el-nombre-nid2022837/"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "ricotero",
+      "termino": "Ricotero",
+      "tipo": "jerga_ricotera",
+      "aparece_en": {
+        "cancion": "(auto-denominación del fandom)",
+        "disco": "(no es de una canción específica)",
+        "anio": null,
+        "banda": null,
+        "posicion": "pasaje_instrumental",
+        "verso": "(término metalingüístico)"
+      },
+      "que_es": "Sustantivo del español rioplatense que designa al seguidor de Patricio Rey y sus Redonditos de Ricota (y por extensión del Indio Solari solista). El término deriva directamente del nombre de la banda. 'Los redonditos de ricota' eran panecillos rellenos de queso ricota preparados por 'El Doce' / 'El Docente', cocinero de la Cofradía de la Flor Solar — la comunidad hippie platense de la que provino parte del grupo originario — y repartidos al público en las primeras presentaciones.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "enciclopedica",
+          "url": "https://www.diccionarioargentino.com/term/Ricotero"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Patricio_Rey_y_sus_Redonditos_de_Ricota"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "lonardi_ni_vencedores_ni_vencidos",
+      "termino": "Vencedores vencidos (frase de Lonardi, 1955)",
+      "tipo": "evento_historico",
+      "aparece_en": {
+        "cancion": "Vencedores Vencidos",
+        "disco": "Un Baión para el Ojo Idiota",
+        "anio": 1988,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "Un mudo con tu voz, y un ciego como yo / ¡Vencedores vencidos!"
+      },
+      "que_es": "El título y estribillo invierten la consigna 'Ni vencedores ni vencidos' pronunciada por el general Eduardo Lonardi en su discurso del 23 de septiembre de 1955 frente a Plaza de Mayo, tras el golpe cívico-militar que derrocó a Juan Domingo Perón (Revolución Libertadora). Lonardi a su vez citaba una frase atribuida a Justo José de Urquiza después de la batalla de Caseros (1852).",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203055/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Revoluci%C3%B3n_Libertadora"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://historiahoy.com.ar/ni-vencedores-ni-vencidos-la-revolucion-libertadora-n373",
+          "descripcion": "Historia Hoy documenta el discurso de Lonardi del 23/09/1955"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "ray_ban",
+      "termino": "Ray-Ban",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Vencedores Vencidos",
+        "disco": "Un Baión para el Ojo Idiota",
+        "anio": 1988,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Leyendo diarios en un baño turco / Empañando Ray-Ban's, mascando un hueso"
+      },
+      "que_es": "Marca estadounidense de anteojos de sol fundada en 1937 por Bausch & Lomb. El modelo Aviator (1937) y el Wayfarer (1956) son íconos del diseño industrial del siglo XX, asociados a pilotos militares, estrellas de Hollywood y la cultura pop.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203055/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Ray-Ban"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "johnnie_walker_etiqueta_negra",
+      "termino": "Etiqueta Negra (Johnnie Walker Black Label)",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Etiqueta Negra",
+        "disco": "Lobo Suelto / Cordero Atado",
+        "anio": 1993,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo",
+        "verso": "Etiqueta Negra (título de la canción)"
+      },
+      "que_es": "Whisky escocés blended de la marca Johnnie Walker, en su versión de 12 años de añejamiento, identificada por su etiqueta de color negro. La marca Johnnie Walker fue fundada en Kilmarnock, Escocia, en 1820 por John Walker. La gama de etiquetas (Red, Black, Green, Gold, Blue) ordena calidad y añejamiento.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202685/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Johnnie_Walker"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/202685/significado.html",
+          "descripcion": "Significado oficial Letras.com identifica la marca Johnnie Walker Black Label como referente del título"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "masacre_pabellon_septimo_devoto_1978",
+      "termino": "Masacre del Pabellón Séptimo (Villa Devoto, 14 de marzo de 1978)",
+      "tipo": "evento_historico",
+      "aparece_en": {
+        "cancion": "Pabellón Séptimo (Relato de Horacio)",
+        "disco": "El Tesoro de los Inocentes (Bingo Fuel)",
+        "anio": 2004,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "titulo_y_verso",
+        "verso": "¡Me asfixio! Dios! / Pienso en mi cara, se está quemando, ahora, mi cara"
+      },
+      "que_es": "Masacre ocurrida el 14 de marzo de 1978 en el Pabellón 7 de la Unidad 2 del Servicio Penitenciario Federal en Villa Devoto, durante la última dictadura militar argentina. Al menos 65 presos (64 según la versión oficial) murieron asfixiados, quemados o baleados tras una represión brutal. En agosto de 2014 la justicia federal argentina declaró los hechos como crimen de lesa humanidad. El Indio Solari compuso la canción a partir del testimonio del sobreviviente Horacio Santantonin, transcripto por el criminólogo Elías Neuman en el libro 'Crónica de muertes silenciadas. Villa Devoto, 14 de marzo de 1978' (1985).",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/203950/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Masacre_en_el_pabell%C3%B3n_s%C3%A9ptimo"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Pabell%C3%B3n_s%C3%A9ptimo_(relato_de_Horacio)"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.pagina12.com.ar/575727-me-asfixio-dios/",
+          "descripcion": "Página/12 documenta la conexión entre la canción, el libro de Neuman y la masacre"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "hospital_salaberry",
+      "termino": "Hospital Salaberry",
+      "tipo": "lugar",
+      "aparece_en": {
+        "cancion": "Pabellón Séptimo (Relato de Horacio)",
+        "disco": "El Tesoro de los Inocentes (Bingo Fuel)",
+        "anio": 2004,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "verso",
+        "verso": "Estoy herido, estoy quemado / voy en camilla por el Salaberry"
+      },
+      "que_es": "Hospital ubicado en el barrio de Villa Devoto, Ciudad de Buenos Aires (calle Salaberry 1879). Fue el centro de salud al que fueron trasladados los heridos sobrevivientes de la masacre del Pabellón Séptimo de la Unidad 2 del SPF el 14 de marzo de 1978.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.cmtv.com.ar/discos_letras/letra.php?bnid=141&banda=Indio_Solari&DS_DS=1352&tmid=23583&tema=PABELLON_SEPTIMO_%28RELATO_DE_HORACIO%29"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Masacre_en_el_pabell%C3%B3n_s%C3%A9ptimo"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "luis_maria_canosa",
+      "termino": "Luis María (Canosa)",
+      "tipo": "figura_historica",
+      "aparece_en": {
+        "cancion": "Toxi-Taxi",
+        "disco": "La Mosca y la Sopa",
+        "anio": 1991,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Un sueño con Luis María, muerto cuando me decía: / cada día veo menos, cada día veo menos / pienso, menos mal"
+      },
+      "que_es": "Luis María Canosa, amigo de juventud del Indio Solari en La Plata, integrante de la banda Dulcemembriyo (fundada en 1968) junto a Federico Moura. Fue una de las víctimas mortales de la masacre del Pabellón Séptimo en Villa Devoto el 14 de marzo de 1978.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "fan_critica",
+          "url": "https://revistasudestada.com.ar/articulo/1537/un-sueno-con-luis-maria/index.html",
+          "descripcion": "Revista Sudestada reconstruye la biografía de Canosa y su vínculo con el Indio"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Pabell%C3%B3n_s%C3%A9ptimo_(relato_de_Horacio)"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://laplatanoticias.com/2022/04/24/un-crimen-de-estado-que-el-indio-solari-hizo-cancion/",
+          "descripcion": "La Plata Noticias documenta que Toxi-Taxi alude a Canosa"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "luzbel",
+      "termino": "Luzbel / Luzbelito",
+      "tipo": "personaje_de_ficcion",
+      "aparece_en": {
+        "cancion": "Luzbelito y las Sirenas",
+        "disco": "Luzbelito",
+        "anio": 1996,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "Luzbelito sabe que su destino es de soledad / ve también que los demás se dan cuenta de la risa que le da"
+      },
+      "que_es": "Luzbel (del latín 'Lucifer', 'el que lleva la luz') es el nombre tradicional del ángel caído en la teología cristiana, identificado con Satanás. El diminutivo 'Luzbelito' es invención lírica del Indio Solari y da nombre al séptimo álbum de estudio de la banda (1 de agosto de 1996), que funciona como disco conceptual alrededor de un ficticio hijo del demonio.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://chords.lacuerda.net/patricio_rey/luzbelito_y_las_sirenas"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Luzbelito"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Lucifer"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "nike",
+      "termino": "Nike",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Nike es la cultura",
+        "disco": "El Tesoro de los Inocentes (Bingo Fuel)",
+        "anio": 2004,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "titulo_y_verso",
+        "verso": "Vas corriendo con tus Nikes / y las balas van detrás / (lo que duele no es la goma sino su velocidad)"
+      },
+      "que_es": "Marca estadounidense de indumentaria y calzado deportivo fundada en 1964 como Blue Ribbon Sports por Phil Knight y Bill Bowerman en Oregón. Rebautizada Nike en 1971 en honor a la diosa griega de la victoria. Su logo 'Swoosh' (1971) y el eslogan 'Just Do It' (1988) son íconos globales del marketing.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/202649/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Nike,_Inc."
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "air_jordan",
+      "termino": "Jordan (Air Jordan)",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Nike es la cultura",
+        "disco": "El Tesoro de los Inocentes (Bingo Fuel)",
+        "anio": 2004,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "verso",
+        "verso": "tengo trece o quince años... / Las Jordan's son para mí"
+      },
+      "que_es": "Línea de zapatillas y ropa deportiva producida por Nike y asociada al jugador de la NBA Michael Jordan. La primera Air Jordan se lanzó en 1985 y se convirtió en un fenómeno cultural y de coleccionismo. El verso 'Mientras Michael se retira' alude al retiro de Michael Jordan (sucesivos en 1993, 1999 y 2003).",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/202649/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Air_Jordan"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "mtv_latina",
+      "termino": "MTV Latina",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Nike es la cultura",
+        "disco": "El Tesoro de los Inocentes (Bingo Fuel)",
+        "anio": 2004,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "verso",
+        "verso": "carroñeros que te rajan la careta de MTV latina"
+      },
+      "que_es": "Canal de televisión musical lanzado en octubre de 1993 por Viacom como filial latinoamericana de MTV (Music Television, fundada en EE.UU. en 1981). Difundió videoclips e influyó en la cultura pop adolescente latinoamericana de los años noventa y dos mil.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/202649/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/MTV_Latinoam%C3%A9rica"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "espn",
+      "termino": "ESPN",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Nike es la cultura",
+        "disco": "El Tesoro de los Inocentes (Bingo Fuel)",
+        "anio": 2004,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "verso",
+        "verso": "Mientras Michael se retira, en la cadena ESPN"
+      },
+      "que_es": "Cadena de televisión deportiva estadounidense (Entertainment and Sports Programming Network) fundada en 1979, controlada mayoritariamente por The Walt Disney Company. Es la cadena de cable de mayor audiencia de Estados Unidos en deportes y tiene versiones latinoamericanas desde 1989.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/202649/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/ESPN"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "averna",
+      "termino": "Averna",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Pool, Averna y Papusa",
+        "disco": "Momo Sampler",
+        "anio": 2000,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo",
+        "verso": "Pool, Averna y Papusa (título de la canción)"
+      },
+      "que_es": "Amaro (licor amargo de hierbas) italiano elaborado desde 1868 por Fratelli Averna en Caltanissetta, Sicilia. Toma su nombre de Salvatore Averna, su creador. Es uno de los amari más vendidos de Italia y se consume tradicionalmente como digestivo después de las comidas.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203027/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://en.wikipedia.org/wiki/Amaro_Averna"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203027/significado.html",
+          "descripcion": "Significado oficial Letras.com identifica Averna como amaro italiano de Fratelli Averna"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "american_express",
+      "termino": "American Express",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Pool, Averna y Papusa",
+        "disco": "Momo Sampler",
+        "anio": 2000,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Con un platino de American Express / Trucho, pero un lindo camaleón"
+      },
+      "que_es": "Empresa estadounidense de servicios financieros fundada en 1850 en Buffalo, Nueva York. Su tarjeta de crédito 'Platinum' (lanzada en 1984) es identificada como producto premium, asociado a estatus y poder adquisitivo elevado. En el verso, el adjetivo 'trucho' (argentinismo, 'falso, apócrifo') invierte ese estatus.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203027/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/American_Express"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "pontiac",
+      "termino": "Pontiac",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "Mariposa Pontiac - Rock del País",
+        "disco": "Luzbelito",
+        "anio": 1996,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "Ay, mariposa Pontiac, ¿qué va a ser de mí?"
+      },
+      "que_es": "Marca de automóviles estadounidense fundada en 1926 por General Motors en Pontiac, Michigan. Producía modelos deportivos y muscle cars asociados a la cultura rock and roll de Estados Unidos (Pontiac GTO, Firebird, Trans Am). La marca fue discontinuada por GM en 2010.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203013/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Pontiac_(automovilismo)"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "coca_cola",
+      "termino": "Coca-Cola",
+      "tipo": "marca",
+      "aparece_en": {
+        "cancion": "La Piba de Blockbuster",
+        "disco": "El Tesoro de los Inocentes (Bingo Fuel)",
+        "anio": 2004,
+        "banda": "Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "verso",
+        "verso": "Esa rata pelirroja es hija de croatas y me hechizó / Coca-cola y bosanova y nada de tatuajes que ensucien su piel"
+      },
+      "que_es": "Bebida gaseosa creada en 1886 por el farmacéutico John Pemberton en Atlanta, Georgia. The Coca-Cola Company es una de las marcas más reconocidas del mundo y es referencia frecuente del consumo global y de la cultura pop estadounidense del siglo XX.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/indio-solari/203949/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Coca-Cola"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "san_telmo",
+      "termino": "San Telmo",
+      "tipo": "lugar",
+      "aparece_en": {
+        "cancion": "San Telmo",
+        "disco": "Lobo Suelto / Cordero Atado",
+        "anio": 1993,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo",
+        "verso": "San Telmo (título de la canción)"
+      },
+      "que_es": "Barrio del sur de la Ciudad de Buenos Aires, fundado en 1734. Es el barrio más antiguo de la ciudad. Conocido por sus calles empedradas, casas coloniales, el mercado de antigüedades de la Plaza Dorrego y la tradición tanguera. Lleva el nombre de San Pedro González Telmo, patrono de los marineros.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.cmtv.com.ar/discos_letras/letra.php?bnid=234&banda=Patricio_Rey_y_Sus_Redonditos_de_Ricota&DS_DS=2251&tmid=38797&tema=SAN_TELMO"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/San_Telmo_(Buenos_Aires)"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "delta",
+      "termino": "el Delta (del Paraná)",
+      "tipo": "lugar",
+      "aparece_en": {
+        "cancion": "Tarea Fina",
+        "disco": "Gulp!",
+        "anio": 1985,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "verso",
+        "verso": "Un auto guapo va a venir por vos / y nada va a cambiar / Vas a vivir en el Delta, en un lanchón / buscando de qué reír"
+      },
+      "que_es": "Delta del río Paraná, sistema de islas y canales en la confluencia de los ríos Paraná y de la Plata, en la provincia de Buenos Aires (Argentina), Entre Ríos y partes de Santa Fe. Su zona más turística y residencial es la 'Primera Sección' del Delta, accesible desde la ciudad de Tigre. Habitar 'en un lanchón' alude a las casas-bote sobre el agua que son típicas del lugar.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203044/"
+        },
+        {
+          "tipo": "enciclopedica",
+          "url": "https://es.wikipedia.org/wiki/Delta_del_Paran%C3%A1"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "misa_ricotera",
+      "termino": "Misa ricotera",
+      "tipo": "practica_cultural",
+      "aparece_en": {
+        "cancion": "(jerga ricotera, no aparece dentro de una letra cantada)",
+        "disco": "(no aplica)",
+        "anio": 0,
+        "banda": "Patricio Rey y sus Redonditos de Ricota / Indio Solari y los Fundamentalistas del Aire Acondicionado",
+        "posicion": "pasaje_instrumental",
+        "verso": "(jerga del público y de la prensa, no verso de canción)"
+      },
+      "que_es": "Modo en que el público ricotero y la prensa argentina denominaron, ya desde los años noventa, los recitales de Patricio Rey y sus Redonditos de Ricota y, luego, los de Indio Solari y los Fundamentalistas del Aire Acondicionado. El término describe la dimensión litúrgica y comunional del evento: la peregrinación de fans desde todo el país, los códigos compartidos, el pogo masivo y el carácter de rito colectivo más que de simple show. La denominación dialoga con la frase del propio Indio: 'Patricio Rey comulga con su feligresía'.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.infobae.com/teleshow/2026/06/05/el-pogo-mas-grande-del-mundo-el-ritual-que-el-indio-solari-convirtio-en-emblema-de-una-generacion-y-asombro-al-mundo/",
+          "descripcion": "Infobae explica la dimensión ritual y la denominación 'misa ricotera'"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.tvpublica.com.ar/post/el-adios-al-indio-solari-como-eran-las-misas-ricoteras",
+          "descripcion": "TV Pública define el fenómeno de las misas ricoteras"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.losandes.com.ar/opinion/el-indio-las-misas-ricoteras-y-aquello-que-los-sociologos-no-supimos-mirar-n5993918",
+          "descripcion": "Los Andes ofrece lectura sociológica del fenómeno"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "pogo_mas_grande_del_mundo",
+      "termino": "El pogo más grande del mundo",
+      "tipo": "practica_cultural",
+      "aparece_en": {
+        "cancion": "(consigna lanzada por el Indio en escenario, no verso de canción)",
+        "disco": "(no aplica)",
+        "anio": 2000,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "pasaje_instrumental",
+        "verso": "Vamos a hacer lo que la prensa ha llamado 'el pogo más grande del mundo' (introducción a Ji Ji Ji, River Plate, 2000)"
+      },
+      "que_es": "Consigna asociada al recital de Patricio Rey en el estadio Monumental de River Plate en 2000, en la que el Indio Solari invitó al público a hacer un pogo masivo durante la canción Ji Ji Ji. Se convirtió en sello distintivo de los recitales posteriores: cada vez que se ejecutaba Ji Ji Ji al final del show, el público hacía un pogo de centenares de miles de personas a la vez. El término 'pogo' designa el modo de baile de pie con saltos y choques de cuerpos típico del punk y el hardcore desde fines de los años 70.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.infobae.com/teleshow/2026/06/05/el-pogo-mas-grande-del-mundo-el-ritual-que-el-indio-solari-convirtio-en-emblema-de-una-generacion-y-asombro-al-mundo/",
+          "descripcion": "Infobae documenta la frase del Indio en River 2000 y su impacto"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://www.pronto.com.ar/espectaculos/2026/6/5/el-origen-de-la-misa-ricotera-el-legado-inmortal-del-indio-solari-vamos-hacer-el-pogo-mas-grande-del-mundo-279253.html",
+          "descripcion": "Revista Pronto reconstruye el origen de la consigna"
+        }
+      ],
+      "confianza": "alta"
+    },
+    {
+      "id": "tarea_fina",
+      "termino": "Tarea fina",
+      "tipo": "jerga_ricotera",
+      "aparece_en": {
+        "cancion": "Tarea Fina",
+        "disco": "Gulp!",
+        "anio": 1985,
+        "banda": "Patricio Rey y sus Redonditos de Ricota",
+        "posicion": "titulo_y_verso",
+        "verso": "Le das la copa, al fin, al vencedor / Tarea fina, perdida en mi soledad"
+      },
+      "que_es": "Expresión del lunfardo y la jerga policial/militar argentina que designa una operación de detalle, de precisión, hecha por especialistas. En contextos represivos de los años setenta se asoció a operaciones de identificación y eliminación de objetivos puntuales. La canción reapropia la expresión en un contexto erótico-afectivo (despedida, traición íntima), pero la frase quedó como modismo dentro del léxico ricotero.",
+      "contemporaneidad": null,
+      "fuentes": [
+        {
+          "tipo": "letra",
+          "url": "https://www.letras.com/los-redonditos-de-ricota/203044/"
+        },
+        {
+          "tipo": "fan_critica",
+          "url": "https://esaviejaculturafrita.blogspot.com/2011/12/mariposa-pontiac-rock-del-pais.html",
+          "descripcion": "Discusión sobre el campo semántico de la jerga ricotera en el blog Esa Vieja Cultura Frita (usado solo como mapa, no como verdad)"
+        }
+      ],
+      "confianza": "media"
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e0d0c">
+<title>Espacio — Mi único héroe</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .post-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .post-autor { font-size: .8rem; color: var(--gold); margin-bottom: 8px; }
+  .post-titulo { font-family: var(--font-display); font-size: 1.2rem; color: var(--ink); margin-bottom: 6px; }
+  .post-texto { color: var(--ink); margin: 8px 0; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">·</span>
+    <span class="brand-name">Mi único héroe</span>
+  </a>
+  <nav class="topnav">
+    <a href="glosario.html">Glosario</a>
+    <a href="canciones.html">Canciones</a>
+    <a href="espacios.html" class="active">Espacios</a>
+    <a href="tributos.html">Tributos</a>
+    <a href="acerca.html">Acerca</a>
+    <span id="auth-slot"></span>
+  </nav>
+</header>
+
+<main class="glosario">
+  <header class="glosario-header" id="cabecera-espacio">
+    <p class="lead">Cargando…</p>
+  </header>
+
+  <section id="form-post-section" style="display:none;">
+    <h2 style="font-size: 1.2rem;">Compartir algo en este espacio</h2>
+    <form class="form-grande" id="form-post" style="margin: 16px 0 32px;">
+      <div>
+        <input type="text" id="post-titulo" maxlength="120" placeholder="Título (opcional)">
+      </div>
+      <div>
+        <textarea id="post-texto" rows="4" maxlength="2000" placeholder="Tu mensaje, recuerdo, foto a comentar…" required></textarea>
+      </div>
+      <div>
+        <input type="url" id="post-youtube" placeholder="Link de YouTube (opcional)">
+      </div>
+      <div class="actions">
+        <button type="submit" class="cta-primary">Publicar</button>
+      </div>
+      <div id="post-resultado"></div>
+    </form>
+  </section>
+
+  <div id="no-login" style="display:none; padding: 16px; background: var(--bg-soft); border-radius: var(--radius); margin-bottom: 24px;">
+    <p>Tenés que <a href="acceder.html">iniciar sesión</a> para publicar en este espacio.</p>
+  </div>
+
+  <section>
+    <h2 style="font-size: 1.3rem;">Posts recientes</h2>
+    <div id="posts-cont" style="margin-top: 16px;">Cargando…</div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
+  <p class="footer-version">v0.2.0</p>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/supa.js"></script>
+<script src="assets/app.js"></script>
+<script>
+function esc(s) { return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function ytEmbed(url) {
+  const m = String(url).match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([A-Za-z0-9_-]{6,})/);
+  if (!m) return null;
+  return "https://www.youtube.com/embed/" + m[1];
+}
+async function cargarPosts(espacio_id) {
+  const cont = document.getElementById("posts-cont");
+  try {
+    const posts = await MUH_SUPA.listarPostsDeEspacio(espacio_id);
+    if (!posts.length) {
+      cont.innerHTML = '<p style="color:var(--ink-dim);">Todavía no hay posts. Sé el primero.</p>';
+      return;
+    }
+    cont.innerHTML = posts.map(p => {
+      const yt = p.youtube_url ? ytEmbed(p.youtube_url) : null;
+      return `
+        <div class="post-card">
+          <div class="post-autor">${esc((p.autor && p.autor.nombre_display) || "ricotero")}${p.autor && p.autor.ciudad ? " · " + esc(p.autor.ciudad) + (p.autor.pais ? ", " + esc(p.autor.pais) : "") : ""}</div>
+          ${p.titulo ? '<div class="post-titulo">' + esc(p.titulo) + '</div>' : ""}
+          ${p.texto ? '<div class="post-texto">' + esc(p.texto) + '</div>' : ""}
+          ${yt ? '<div style="margin-top:10px; aspect-ratio:16/9; max-width:600px;"><iframe style="width:100%;height:100%;border:0;border-radius:var(--radius-sm);" src="' + yt + '" allowfullscreen></iframe></div>' : ""}
+        </div>
+      `;
+    }).join("");
+  } catch (e) {
+    cont.innerHTML = '<p style="color:var(--ink-dim);">No pude cargar los posts.</p>';
+    console.warn(e);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  MUH.hidratarTopbar();
+  const slug = new URLSearchParams(location.search).get("s");
+  if (!slug) {
+    document.getElementById("cabecera-espacio").innerHTML = "<h1>Espacio no encontrado</h1>";
+    return;
+  }
+  const esp = await MUH_SUPA.obtenerEspacio(slug);
+  if (!esp) {
+    document.getElementById("cabecera-espacio").innerHTML = '<h1>Espacio no encontrado</h1><p class="lead"><a href="espacios.html">Ver todos los espacios</a></p>';
+    return;
+  }
+  document.getElementById("cabecera-espacio").innerHTML = `
+    <p class="hero-eyebrow">${esp.tipo === "geografico" ? "Por ciudad" : "Temático"}${esp.region_pais ? " · " + esc(esp.region_pais) : ""}</p>
+    <h1>${esc(esp.nombre)}</h1>
+    ${esp.descripcion ? '<p class="lead">' + esc(esp.descripcion) + '</p>' : ""}
+  `;
+  const u = await MUH_SUPA.getUsuarioActual();
+  if (u) {
+    document.getElementById("form-post-section").style.display = "block";
+    document.getElementById("form-post").addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const out = document.getElementById("post-resultado");
+      out.innerHTML = "";
+      try {
+        await MUH_SUPA.crearPost({
+          espacio_id: esp.id,
+          titulo: document.getElementById("post-titulo").value.trim() || null,
+          texto: document.getElementById("post-texto").value.trim(),
+          youtube_url: document.getElementById("post-youtube").value.trim() || null
+        });
+        out.innerHTML = '<div class="mensaje-ok">Publicado.</div>';
+        document.getElementById("form-post").reset();
+        cargarPosts(esp.id);
+      } catch (e) {
+        out.innerHTML = '<div class="mensaje-error">No pude publicar: ' + (e.message || "error") + '</div>';
+      }
+    });
+  } else {
+    document.getElementById("no-login").style.display = "block";
+  }
+  cargarPosts(esp.id);
+});
+</script>
+</body>
+</html>

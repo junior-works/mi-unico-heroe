@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e0d0c">
+<title>Mi perfil — Mi único héroe</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">·</span>
+    <span class="brand-name">Mi único héroe</span>
+  </a>
+  <nav class="topnav">
+    <a href="glosario.html">Glosario</a>
+    <a href="canciones.html">Canciones</a>
+    <a href="espacios.html">Espacios</a>
+    <a href="tributos.html">Tributos</a>
+    <a href="acerca.html">Acerca</a>
+    <span id="auth-slot"></span>
+  </nav>
+</header>
+
+<main class="pagina">
+  <h1>Mi perfil</h1>
+  <p class="lead">Acá controlás cómo te ven los demás ricoteros.</p>
+
+  <div id="no-login" style="display:none; margin-top: 24px;">
+    <p>Tenés que iniciar sesión para ver tu perfil. <a href="acceder.html">Entrar</a></p>
+  </div>
+
+  <form class="form-grande" id="form-perfil" style="margin-top: 32px; display:none;">
+    <div>
+      <label for="nombre">Cómo te mostramos</label>
+      <input type="text" id="nombre" maxlength="60" required>
+      <p class="hint">El nombre que ven los demás. Puede ser tu nombre real o tu alias ricotero.</p>
+    </div>
+
+    <div>
+      <label for="bio">Una línea sobre vos (opcional)</label>
+      <textarea id="bio" rows="2" maxlength="200" placeholder="Indio para siempre. Ji ji ji."></textarea>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div>
+        <label for="pais">País</label>
+        <input type="text" id="pais" maxlength="60" placeholder="Argentina">
+      </div>
+      <div>
+        <label for="ciudad">Ciudad</label>
+        <input type="text" id="ciudad" maxlength="60" placeholder="La Plata">
+      </div>
+    </div>
+    <p class="hint">Texto libre. Por privacidad NO pedimos dirección ni ubicación exacta.</p>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="en-mapa">
+      <div>
+        <label for="en-mapa">Aparecer en el mapa de ricoteros del mundo</label>
+        <p class="hint">Otros ricoteros van a ver tu nombre, país y ciudad en el mapa. No mostramos tu correo ni dato privado. Podés sacarlo cuando quieras.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="cta-primary">Guardar</button>
+      <button type="button" id="btn-cerrar-sesion" class="cta-secondary">Cerrar sesión</button>
+    </div>
+    <div id="resultado"></div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
+  <p class="footer-version">v0.2.0</p>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/supa.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  MUH.hidratarTopbar();
+  const u = await MUH_SUPA.getUsuarioActual();
+  if (!u) {
+    document.getElementById("no-login").style.display = "block";
+    return;
+  }
+  const perfil = await MUH_SUPA.obtenerPerfilPropio();
+  const form = document.getElementById("form-perfil");
+  form.style.display = "grid";
+  document.getElementById("nombre").value = (perfil && perfil.nombre_display) || u.email.split("@")[0];
+  document.getElementById("bio").value = (perfil && perfil.bio) || "";
+  document.getElementById("pais").value = (perfil && perfil.pais) || "";
+  document.getElementById("ciudad").value = (perfil && perfil.ciudad) || "";
+  document.getElementById("en-mapa").checked = !!(perfil && perfil.en_mapa_publico);
+
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const out = document.getElementById("resultado");
+    out.innerHTML = "";
+    try {
+      await MUH_SUPA.actualizarPerfil({
+        nombre_display: document.getElementById("nombre").value.trim(),
+        bio: document.getElementById("bio").value.trim() || null,
+        pais: document.getElementById("pais").value.trim() || null,
+        ciudad: document.getElementById("ciudad").value.trim() || null,
+        en_mapa_publico: document.getElementById("en-mapa").checked
+      });
+      out.innerHTML = '<div class="mensaje-ok">Perfil guardado.</div>';
+    } catch (e) {
+      out.innerHTML = '<div class="mensaje-error">No pude guardar: ' + (e.message || "error") + '</div>';
+    }
+  });
+
+  document.getElementById("btn-cerrar-sesion").addEventListener("click", () => {
+    MUH_SUPA.cerrarSesion();
+    location.href = "index.html";
+  });
+});
+</script>
+</body>
+</html>

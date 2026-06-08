@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e0d0c">
+<title>Glosario — Mi único héroe</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">·</span>
+    <span class="brand-name">Mi único héroe</span>
+  </a>
+  <nav class="topnav">
+    <a href="glosario.html" class="active">Glosario</a>
+    <a href="canciones.html">Canciones</a>
+    <a href="espacios.html">Espacios</a>
+    <a href="tributos.html">Tributos</a>
+    <a href="acerca.html">Acerca</a>
+    <span id="auth-slot"></span>
+  </nav>
+</header>
+
+<main class="glosario">
+  <header class="glosario-header">
+    <h1>Glosario</h1>
+    <p class="lead">Buscá por palabra, filtrá por tipo, por disco o por nivel de confianza. Tocá una entrada para ver el detalle completo con verso, definición y fuentes. <a href="proponer.html">¿Falta una palabra? Proponé una nueva entrada.</a></p>
+  </header>
+
+  <div class="filtros">
+    <div class="filtro-buscar">
+      <input type="search" id="filtro-buscar" placeholder="Buscar término, verso, canción…" autocomplete="off">
+    </div>
+    <select id="filtro-tipo">
+      <option value="">Todos los tipos</option>
+    </select>
+    <select id="filtro-disco">
+      <option value="">Todos los discos</option>
+    </select>
+    <select id="filtro-confianza">
+      <option value="">Toda confianza</option>
+      <option value="alta">Confianza alta</option>
+      <option value="media">Confianza media</option>
+    </select>
+  </div>
+
+  <div class="contador-resultados" id="contador-resultados">cargando…</div>
+
+  <div class="entradas-lista" id="entradas-cont"></div>
+</main>
+
+<div class="modal-back" id="modal-back" role="dialog" aria-modal="true">
+  <div class="modal" id="modal-body"></div>
+</div>
+
+<footer class="site-footer">
+  <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
+  <p class
