@@ -1,4 +1,4 @@
-/* Mi único héroe v0.3.4 — logo SVG nítido + nav mobile fix */
+/* Mi único héroe v0.3.5 — logo + anillo blanco fino (sin rediseñar nada) */
 :root {
   --bg: #0e0d0c;
   --bg-soft: #1a1818;
@@ -30,7 +30,6 @@ a { color: var(--accent-soft); text-decoration: none; }
 a:hover { text-decoration: underline; }
 img { max-width: 100%; height: auto; display: block; }
 
-/* topbar */
 .topbar {
   display: flex; align-items: center; justify-content: space-between;
   padding: 10px 16px; background: var(--bg-soft);
@@ -43,10 +42,14 @@ img { max-width: 100%; height: auto; display: block; }
   flex-shrink: 0; line-height: 1;
 }
 .brand:hover { text-decoration: none; }
+
+/* Logo: el círculo negro tal como vos lo mandaste, con un anillo blanco fino afuera. Punto. */
 .brand-logo {
   display: inline-block;
   width: 40px; height: 40px;
-  background: url("logo-muh.svg") center/contain no-repeat;
+  background: url("logo-muh.png") center/contain no-repeat;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
   flex-shrink: 0;
 }
 .brand-name { font-size: 1rem; }
@@ -66,7 +69,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 @media (max-width: 600px) {
   .topbar { padding: 8px 12px; gap: 8px; }
-  .brand-logo { width: 34px; height: 34px; }
+  .brand-logo { width: 34px; height: 34px; border-width: 1.5px; }
   .brand-name { display: none; }
   .topnav { gap: 12px; }
   .topnav a { font-size: .9rem; padding: 6px 2px; }
@@ -75,7 +78,6 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-mini { font-size: .9rem; }
 .link-bare { background:none; border:0; color:var(--ink-soft); cursor:pointer; font-size:.9rem; }
 
-/* hero */
 .hero {
   padding: 50px 24px 18px;
   text-align: center; max-width: 720px; margin: 0 auto;
