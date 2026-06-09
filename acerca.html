@@ -10,19 +10,50 @@
 </head>
 <body>
 <header class="topbar">
-  <a href="index.html" class="brand"><span class="brand-mark">·</span><span class="brand-name">Mi único héroe</span></a>
-  <nav class="topnav"><a href="glosario.html">Glosario</a><a href="canciones.html">Canciones</a><a href="espacios.html">Espacios</a><a href="tributos.html">Tributos</a><a href="acerca.html" class="active">Acerca</a><span id="auth-slot"></span></nav>
+  <a href="index.html" class="brand">
+    <span class="brand-mark">·</span>
+    <span class="brand-name">Mi único héroe</span>
+  </a>
+  <nav class="topnav">
+    <a href="glosario.html">Glosario</a>
+    <a href="canciones.html">Canciones</a>
+    <a href="espacios.html">Espacios</a>
+    <a href="tributos.html">Tributos</a>
+    <a href="acerca.html" class="active">Acerca</a>
+    <span id="auth-slot"></span>
+  </nav>
 </header>
 
 <main class="pagina">
   <h1>Acerca de Mi único héroe</h1>
-  <p>Sitio de fans que explica qué refieren las palabras, lugares y referencias de las letras de Patricio Rey y sus Redonditos de Ricota, del Indio Solari y de Skay Beilinson. No interpreta intenciones del autor. Solo describe qué refiere cada término en el mundo real, con fuentes verificables.</p>
-  <h2>Sin afiliación</h2>
-  <p>Este sitio no tiene afiliación con Patricio Rey y sus Redonditos de Ricota, con el Indio Solari ni con Skay Beilinson. Es un sitio de fans.</p>
+
+  <p>Es un sitio hecho por fans para entender el universo lírico de Patricio Rey y sus Redonditos de Ricota, del Indio Solari y de Skay Beilinson. No reemplaza la escucha. No interpreta. No se mete en la guerra cultural sobre qué quiso decir el Indio en tal o cual verso. Solo describe qué refieren las palabras y las frases que aparecen en las letras.</p>
+
+  <h2>Qué es y qué no es</h2>
+  <p>Esto <strong>es</strong> un diccionario denotativo. Si en una letra aparece "Kristallnacht", la entrada explica qué fue la Noche de los Cristales Rotos en términos históricos verificables, no especula con qué pensaba el Indio sobre el nazismo. Esto <strong>no es</strong> un sitio de análisis literario ni un foro de debates sobre el legado.</p>
+
+  <h2>Cómo se arma cada entrada</h2>
+  <p>Cada entrada apunta al verso exacto del tema exacto del disco exacto, con la cita literal. Cada una incluye fuentes externas verificables: la letra publicada por el sitio referente, una entrada enciclopédica neutra (Wikipedia, Britannica, etc.), y cuando aplica una fuente crítica o de archivo. Si una entrada no resiste verificación, no se publica. En este corpus inicial ya quedaron afuera varias palabras populares por no tener documentación suficiente.</p>
+
+  <h2>Sin afiliación oficial</h2>
+  <p>Este sitio no tiene afiliación con Patricio Rey y sus Redonditos de Ricota, con el Indio Solari, con Skay Beilinson, con Erks SA, con sus herederos, ni con ninguno de sus titulares. Es un sitio de fans, hecho como homenaje a una obra y a una comunidad. No reproduce las letras íntegras; cita solo los versos donde aparecen las palabras explicadas y enlaza a las fuentes oficiales para que cada quien escuche o lea el tema completo.</p>
+
+  <h2>Música</h2>
+  <p>Los temas se reproducen via embed de YouTube. Es la forma legal de poner el catálogo al alcance del usuario sin tocar licencias. Si el usuario tiene YouTube Premium no ve publicidad; en caso contrario, ve la mínima que el embed permite.</p>
+
   <h2>Donaciones</h2>
-  <p>Si te suma, podés colaborar desde Argentina: <a href="https://cafecito.app/juniorworks" target="_blank" rel="noopener">cafecito.app/juniorworks</a>. Desde el resto del mundo: <a href="https://ko-fi.com/juniorworks" target="_blank" rel="noopener">ko-fi.com/juniorworks</a>.</p>
-  <h2>Versión</h2>
-  <p>v0.2.5</p>
+  <p>Si esto te resulta útil y querés contribuir a cubrir hosting, dominio y el tiempo que toma sumar entradas verificadas, podés hacerlo de dos formas según desde dónde estés:</p>
+  <ul style="margin: 12px 0 18px 24px;">
+    <li><strong>Desde Argentina (en pesos)</strong>: <a href="https://cafecito.app/juniorworks" target="_blank" rel="noopener">cafecito.app/juniorworks</a></li>
+    <li><strong>Desde el resto del mundo (euros, dólares, lo que sea)</strong>: <a href="https://ko-fi.com/juniorworks" target="_blank" rel="noopener">ko-fi.com/juniorworks</a></li>
+  </ul>
+  <p>Las dos llegan a la misma cuenta ("Junior Works") que también sostiene Cómo Te Pega — el donante elige a qué proyecto va. Sin presión y sin condicionar nada del sitio: el glosario y la comunidad son y van a seguir siendo gratuitos.</p>
+
+  <h2>Para bandas tributo</h2>
+  <p>Si tenés banda tributo y la cargás acá, este espacio es 100% gratuito y va a seguir siéndolo. Si llegaste a fans nuevos gracias al mapa, podés colaborar — en pesos via <a href="https://cafecito.app/juniorworks" target="_blank" rel="noopener">Cafecito</a> o en euros/dólares via <a href="https://ko-fi.com/juniorworks" target="_blank" rel="noopener">Ko-fi</a> — y nos ayudás a sostener el proyecto. No es obligatorio: tu banda, tu evento y tu visibilidad no dependen de ninguna donación.</p>
+
+  <h2>Versión y contacto</h2>
+  <p>Este es el corpus inicial v0.2.5. El glosario se irá ampliando con nuevos batches verificados. Si encontrás un error o una referencia que falta y tenés la fuente para sumarla, escribinos.</p>
 </main>
 
 <footer class="site-footer">
@@ -33,7 +64,7 @@
 <script src="assets/supa.js?v=025"></script>
 <script src="assets/app.js?v=025"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => MUH.hidratarTopbar());
+  document.addEventListener("DOMContentLoaded", () => MUH.hidratarTopbar());
 </script>
 </body>
 </html>

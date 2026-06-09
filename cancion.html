@@ -7,10 +7,103 @@
 <title>Canción — Mi único héroe</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="assets/styles.css?v=025">
-<meta http-equiv="refresh" content="0; url=glosario.html">
 </head>
 <body>
-<p>Redirigiendo al glosario...</p>
-<footer class="site-footer"><p class="footer-version">v0.2.5</p></footer>
+<header class="topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">·</span>
+    <span class="brand-name">Mi único héroe</span>
+  </a>
+  <nav class="topnav">
+    <a href="glosario.html">Glosario</a>
+    <a href="canciones.html" class="active">Canciones</a>
+    <a href="espacios.html">Espacios</a>
+    <a href="tributos.html">Tributos</a>
+    <a href="acerca.html">Acerca</a>
+    <span id="auth-slot"></span>
+  </nav>
+</header>
+
+<main class="pagina">
+  <div id="cancion-head">
+    <p><a href="canciones.html">&larr; Volver a canciones</a></p>
+    <h1 id="cancion-titulo">Cargando…</h1>
+    <p class="lead" id="cancion-meta"></p>
+  </div>
+
+  <section style="margin-top: 32px;">
+    <h2>Entradas del glosario en esta canción</h2>
+    <div id="cancion-entradas" class="entradas-grid"></div>
+  </section>
+</main>
+
+<div class="modal-back" id="modal-back" role="dialog" aria-modal="true">
+  <div class="modal" id="modal-body"></div>
+</div>
+
+<footer class="site-footer">
+  <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
+  <p class="footer-version">v0.2.5</p>
+</footer>
+
+<script src="assets/config.js?v=025"></script>
+<script src="assets/supa.js?v=025"></script>
+<script src="assets/app.js?v=025"></script>
+<script>
+  function escHtml(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    MUH.hidratarTopbar();
+    const params = new URLSearchParams(location.search);
+    const c = params.get("c");
+    const titulo = document.getElementById("cancion-titulo");
+    const meta = document.getElementById("cancion-meta");
+    const cont = document.getElementById("cancion-entradas");
+    if (!c) {
+      titulo.textContent = "Canción no especificada";
+      meta.textContent = "Volvé al listado y elegí una.";
+      cont.innerHTML = "";
+      return;
+    }
+    const nombreCancion = decodeURIComponent(c);
+    titulo.textContent = nombreCancion;
+    try {
+      const todas = await MUH_SUPA.listarEntradasGlosario();
+      const dela = todas.filter(e => (e.cancion || "").toLowerCase() === nombreCancion.toLowerCase());
+      if (dela.length === 0) {
+        meta.textContent = "Todavía no hay entradas del glosario que citen versos de esta canción.";
+        cont.innerHTML = '<p style="opacity:.7;">Si conocés una palabra del tema que merezca entrada, <a href="proponer.html">proponéla</a> y la sumamos si la fuente está firme.</p>';
+        return;
+      }
+      const primera = dela[0];
+      const partes = [];
+      if (primera.disco) partes.push(primera.disco);
+      if (primera.anio) partes.push(primera.anio);
+      if (primera.banda) partes.push(primera.banda);
+      meta.textContent = partes.join(" · ");
+      cont.innerHTML = dela.map(e => (
+        '<article class="entrada-card" data-id="' + escHtml(e.id) + '">' +
+          '<h3>' + escHtml(e.termino) + '</h3>' +
+          (e.verso ? '<blockquote class="verso">"' + escHtml(e.verso) + '"</blockquote>' : '') +
+          '<p class="que-es">' + escHtml((e.que_es || "").slice(0, 220) + ((e.que_es || "").length > 220 ? "…" : "")) + '</p>' +
+          '<p class="meta-entrada">' +
+            (e.tipo ? '<span class="tag tag-tipo">' + escHtml(e.tipo.replace(/_/g, " ")) + '</span>' : '') +
+            (e.confianza ? '<span class="tag tag-conf-' + escHtml(e.confianza) + '">' + escHtml(e.confianza) + '</span>' : '') +
+          '</p>' +
+        '</article>'
+      )).join("");
+    } catch (err) {
+      titulo.textContent = "No se pudo cargar la canción";
+      meta.textContent = err.message || "Error desconocido";
+      cont.innerHTML = "";
+    }
+  });
+</script>
 </body>
 </html>

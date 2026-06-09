@@ -10,21 +10,42 @@
 </head>
 <body>
 <header class="topbar">
-  <a href="index.html" class="brand"><span class="brand-mark">·</span><span class="brand-name">Mi único héroe</span></a>
-  <nav class="topnav"><a href="glosario.html">Glosario</a><a href="canciones.html" class="active">Canciones</a><a href="espacios.html">Espacios</a><a href="tributos.html">Tributos</a><a href="acerca.html">Acerca</a><span id="auth-slot"></span></nav>
+  <a href="index.html" class="brand">
+    <span class="brand-mark">·</span>
+    <span class="brand-name">Mi único héroe</span>
+  </a>
+  <nav class="topnav">
+    <a href="glosario.html">Glosario</a>
+    <a href="canciones.html" class="active">Canciones</a>
+    <a href="espacios.html">Espacios</a>
+    <a href="tributos.html">Tributos</a>
+    <a href="acerca.html">Acerca</a>
+    <span id="auth-slot"></span>
+  </nav>
 </header>
 
 <main class="glosario">
-  <header class="glosario-header"><h1>Canciones</h1><p class="lead">Las canciones documentadas en el glosario.</p></header>
+  <header class="glosario-header">
+    <h1>Canciones del universo redondo</h1>
+    <p class="lead">Las canciones que aparecen documentadas en el glosario. Tocá una para ver qué palabras, lugares y referencias explica esta página.</p>
+  </header>
+
   <div id="canciones-cont">Cargando…</div>
 </main>
 
-<footer class="site-footer"><p>Sitio de fans, sin afiliación.</p><p class="footer-version">v0.2.5</p></footer>
+<footer class="site-footer">
+  <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
+  <p class="footer-version">v0.2.5</p>
+</footer>
+
 <script src="assets/config.js?v=025"></script>
 <script src="assets/supa.js?v=025"></script>
 <script src="assets/app.js?v=025"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => { MUH.hidratarTopbar(); MUH.hidratarCanciones(); });
+  document.addEventListener("DOMContentLoaded", () => {
+    MUH.hidratarTopbar();
+    MUH.hidratarCanciones();
+  });
 </script>
 </body>
 </html>
