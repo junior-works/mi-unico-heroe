@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <circle cx="100" cy="100" r="97" fill="#0e0d0c" stroke="#ffffff" stroke-width="3"/>
+  <path d="M 60 85 L 70 55 L 85 78 L 100 48 L 115 78 L 130 55 L 140 85 L 138 96 L 62 96 Z" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"/>
+  <circle cx="70" cy="55" r="3.5" fill="#ffffff"/>
+  <circle cx="85" cy="60" r="3" fill="#ffffff"/>
+  <circle cx="100" cy="48" r="3.5" fill="#ffffff"/>
+  <circle cx="115" cy="60" r="3" fill="#ffffff"/>
+  <circle cx="130" cy="55" r="3.5" fill="#ffffff"/>
+  <text x="100" y="160" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-weight="900" font-size="58" fill="#e83a2e">MUH</text>
+</svg>
