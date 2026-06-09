@@ -1,4 +1,4 @@
-/* Mi único héroe v0.3.1 — estilos con logo + nav mobile fix */
+/* Mi único héroe v0.3.2 — logo recortado + anillo blanco fino */
 :root {
   --bg: #0e0d0c;
   --bg-soft: #1a1818;
@@ -35,18 +35,24 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex; align-items: center; justify-content: space-between;
   padding: 10px 16px; background: var(--bg-soft);
   border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
-  gap: 10px;
+  gap: 12px;
 }
-.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 700; flex-shrink: 0; }
+.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--ink); font-weight: 700;
+  flex-shrink: 0; line-height: 1;
+}
 .brand:hover { text-decoration: none; }
 .brand-logo {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: url("logo-muh.png") center/cover no-repeat #0e0d0c;
+  display: inline-block;
+  width: 38px !important; height: 38px !important;
+  border-radius: 50%;
+  background: url("logo-muh.png") center/contain no-repeat #0e0d0c;
+  border: 1.5px solid #ebe7e2;
   flex-shrink: 0;
 }
-.brand-name { font-size: 1.05rem; }
+.brand-name { font-size: 1rem; }
 
-/* Nav: en desktop normal, en mobile scroll horizontal */
 .topnav {
   display: flex; align-items: center; gap: 14px;
   overflow-x: auto; -webkit-overflow-scrolling: touch;
@@ -61,11 +67,11 @@ img { max-width: 100%; height: auto; display: block; }
 .topnav a:hover, .topnav a.active { color: var(--ink); text-decoration: none; }
 
 @media (max-width: 600px) {
-  .topbar { padding: 8px 12px; gap: 6px; }
-  .brand-logo { width: 34px; height: 34px; }
-  .brand-name { display: none; } /* en mobile solo logo para ahorrar espacio */
-  .topnav { gap: 12px; font-size: .92rem; }
-  .topnav a { font-size: .92rem; padding: 6px 2px; }
+  .topbar { padding: 8px 12px; gap: 8px; }
+  .brand-logo { width: 32px !important; height: 32px !important; border-width: 1px; }
+  .brand-name { display: none; }
+  .topnav { gap: 12px; }
+  .topnav a { font-size: .9rem; padding: 6px 2px; }
 }
 
 .nav-mini { font-size: .9rem; }
