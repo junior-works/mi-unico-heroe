@@ -6,17 +6,14 @@
 <meta name="theme-color" content="#0e0d0c">
 <title>Glosario — Mi único héroe</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="assets/styles.css?v=025">
+<link rel="stylesheet" href="assets/styles.css?v=030">
 </head>
 <body>
 <header class="topbar">
-  <a href="index.html" class="brand">
-    <span class="brand-mark">·</span>
-    <span class="brand-name">Mi único héroe</span>
-  </a>
+  <a href="index.html" class="brand"><span class="brand-mark">·</span><span class="brand-name">Mi único héroe</span></a>
   <nav class="topnav">
+    <a href="discografia.html">Discografía</a>
     <a href="glosario.html" class="active">Glosario</a>
-    <a href="canciones.html">Canciones</a>
     <a href="espacios.html">Espacios</a>
     <a href="tributos.html">Tributos</a>
     <a href="acerca.html">Acerca</a>
@@ -26,15 +23,12 @@
 
 <main class="glosario">
   <header class="glosario-header">
-    <h1>Glosario del universo redondo</h1>
-    <p class="lead">Palabras, lugares, personas y cosas que aparecen en las letras de Patricio Rey y sus Redonditos de Ricota, del Indio Solari y de Skay Beilinson. Cada entrada cita el verso exacto y enlaza fuentes externas verificables.</p>
+    <h1>Glosario</h1>
+    <p class="lead">Palabras, lugares, personas y cosas que canta el Indio Solari en cualquier formación. Cada entrada cita el verso exacto y enlaza fuentes externas verificables.</p>
   </header>
 
   <div class="glosario-filtros">
-    <div class="filtro-grupo">
-      <label for="filtro-buscar">Buscar</label>
-      <input type="text" id="filtro-buscar" placeholder="Término, verso, definición...">
-    </div>
+    <div class="filtro-grupo"><label for="filtro-buscar">Buscar</label><input type="text" id="filtro-buscar" placeholder="Término, verso, definición…"></div>
     <div class="filtro-grupo">
       <label for="filtro-tipo">Tipo</label>
       <select id="filtro-tipo">
@@ -52,9 +46,7 @@
     </div>
     <div class="filtro-grupo">
       <label for="filtro-disco">Disco</label>
-      <select id="filtro-disco">
-        <option value="">Todos</option>
-      </select>
+      <select id="filtro-disco"><option value="">Todos</option></select>
     </div>
     <div class="filtro-grupo">
       <label for="filtro-confianza">Confianza</label>
@@ -62,32 +54,26 @@
         <option value="">Todas</option>
         <option value="alta">Alta</option>
         <option value="media">Media</option>
-        <option value="baja">Baja</option>
       </select>
     </div>
   </div>
 
   <p id="contador-resultados" class="contador-resultados">Cargando…</p>
-
   <div id="entradas-cont" class="entradas-grid"></div>
 
-  <p style="margin-top: 40px; text-align: center;">
-    <a href="proponer.html" class="cta-secondary">Proponer una entrada</a>
-  </p>
+  <p style="margin-top:40px; text-align:center;"><a href="proponer.html" class="cta-secondary">Proponer una entrada</a></p>
 </main>
 
-<div class="modal-back" id="modal-back" role="dialog" aria-modal="true">
-  <div class="modal" id="modal-body"></div>
-</div>
+<div class="modal-back" id="modal-back" role="dialog" aria-modal="true"><div class="modal" id="modal-body"></div></div>
 
 <footer class="site-footer">
   <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
-  <p class="footer-version">v0.2.5</p>
+  <p class="footer-version">v0.3.0</p>
 </footer>
 
-<script src="assets/config.js?v=025"></script>
-<script src="assets/supa.js?v=025"></script>
-<script src="assets/app.js?v=025"></script>
+<script src="assets/config.js?v=030"></script>
+<script src="assets/supa.js?v=030"></script>
+<script src="assets/app.js?v=030"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     MUH.hidratarTopbar();

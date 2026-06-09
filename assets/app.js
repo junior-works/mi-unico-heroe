@@ -1,342 +1,518 @@
-/* =========================================================
-   Mi único héroe — lógica del front (v0.2.4)
-   ========================================================= */
+/* Mi único héroe — app.js v0.3.0
+   Hidratadores de páginas: home, glosario, canciones, cancion (canción con video y letra),
+   discografía, disco, espacios, tributos.
+*/
 (function () {
-  const MUH = {};
-  window.MUH = MUH;
+  if (!window.MUH_SUPA) throw new Error("MUH_SUPA no cargado");
+  const SUPA = window.MUH_SUPA;
+  const CFG = window.MUH_CONFIG;
 
-  const TIPO_LABEL = {
-    "lugar": "Lugar",
-    "figura_historica": "Figura histórica",
-    "obra_cultural": "Obra cultural",
-    "evento_historico": "Evento histórico",
-    "marca": "Marca",
-    "objeto_material": "Objeto",
-    "personaje_de_ficcion": "Personaje de ficción",
-    "jerga_ricotera": "Jerga ricotera",
-    "practica_cultural": "Práctica cultural"
-  };
-  const FUENTE_LABEL = {
-    "letra": "Letra",
-    "enciclopedica": "Enciclopedia",
-    "fan_critica": "Crítica/fan",
-    "primaria": "Fuente primaria",
-    "archivo_periodistico": "Archivo periodístico"
+  // ---- caché simple en memoria ----
+  const cargar = {
+    entradas: null,
+    canciones: null
   };
 
-  let GLOSARIO = null;
-  let CARGANDO = null;
-
-  async function cargar() {
-    if (GLOSARIO) return GLOSARIO;
-    if (CARGANDO) return CARGANDO;
-    CARGANDO = (async () => {
-      try {
-        if (window.MUH_SUPA) {
-          const rows = await MUH_SUPA.listarEntradasGlosario();
-          if (Array.isArray(rows) && rows.length) {
-            GLOSARIO = { entradas: rows.map(adaptarFila), version: "supabase" };
-            return GLOSARIO;
-          }
-        }
-      } catch (e) {
-        console.warn("[MUH] Supabase no disponible, fallback al JSON estático:", e.message);
-      }
-      const r = await fetch("data/glosario.json");
-      if (!r.ok) throw new Error("No pude cargar el glosario.");
-      GLOSARIO = await r.json();
-      return GLOSARIO;
-    })();
-    return CARGANDO;
-  }
-  MUH.cargar = cargar;
-
-  function adaptarFila(row) {
-    return {
-      id: row.id,
-      termino: row.termino,
-      tipo: row.tipo,
-      aparece_en: {
-        cancion: row.cancion,
-        disco: row.disco,
-        anio: row.anio,
-        banda: row.banda,
-        posicion: row.posicion,
-        verso: row.verso
-      },
-      que_es: row.que_es,
-      contemporaneidad: row.contemporaneidad,
-      fuentes: row.fuentes || [],
-      confianza: row.confianza,
-      estado: row.estado
-    };
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
 
-  MUH.hidratarTopbar = async function () {
+  function slugify(s) {
+    return String(s || "").toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
+  }
+
+  function youtubeIdDeUrl(url) {
+    if (!url) return null;
+    const m = url.match(/[?&]v=([\w-]{11})/) || url.match(/youtu\.be\/([\w-]{11})/) || url.match(/embed\/([\w-]{11})/);
+    return m ? m[1] : null;
+  }
+
+  // -------- topbar (auth slot) --------
+  async function hidratarTopbar() {
     const slot = document.getElementById("auth-slot");
-    if (!slot || !window.MUH_SUPA) return;
-    async function renderEstado() {
-      const u = await MUH_SUPA.getUsuarioActual();
-      if (u) {
-        slot.innerHTML = '<a href="mi-perfil.html" title="Mi perfil">Mi perfil</a> <button class="link-button" id="btn-salir">Salir</button>';
-        const btn = document.getElementById("btn-salir");
-        if (btn) btn.addEventListener("click", () => { MUH_SUPA.cerrarSesion(); renderEstado(); });
-      } else {
-        slot.innerHTML = '<a href="acceder.html">Acceder</a>';
-      }
+    if (!slot) return;
+    const u = await SUPA.getUsuarioActual();
+    if (u) {
+      slot.innerHTML = '<a href="mi-perfil.html" class="nav-mini">Mi perfil</a> <button id="btn-salir" class="link-bare">Salir</button>';
+      const b = document.getElementById("btn-salir");
+      if (b) b.addEventListener("click", async () => { await SUPA.cerrarSesion(); location.href = "index.html"; });
+    } else {
+      slot.innerHTML = '<a href="acceder.html" class="nav-mini">Entrar</a>';
     }
-    document.addEventListener("muh-auth-cambio", renderEstado);
-    renderEstado();
-  };
+  }
 
-  MUH.hidratarHome = async function () {
+  // -------- home --------
+  async function hidratarHome() {
+    SUPA.procesarRedirectHash && SUPA.procesarRedirectHash();
+    let entradas;
     try {
-      const d = await cargar();
-      const elE = document.getElementById("stat-entradas");
-      if (elE) elE.textContent = d.entradas.length;
-      const discos = new Set(d.entradas.map(e => e.aparece_en.disco).filter(x => x && !String(x).startsWith("(")));
-      const elD = document.getElementById("stat-discos");
-      if (elD) elD.textContent = discos.size;
-      let nFuentes = 0;
-      d.entradas.forEach(e => { nFuentes += (e.fuentes || []).length; });
-      const elF = document.getElementById("stat-fuentes");
-      if (elF) elF.textContent = nFuentes;
-      const grid = document.getElementById("muestra-grid");
-      if (grid) {
-        const sample = sampleVariado(d.entradas, 3);
-        grid.innerHTML = sample.map(e =>
-          '<div class="muestra-card" data-id="' + escapeAttr(e.id) + '">' +
-            '<div class="muestra-card-tipo">' + escapeHtml(TIPO_LABEL[e.tipo] || e.tipo) + '</div>' +
-            '<div class="muestra-card-term">' + escapeHtml(e.termino) + '</div>' +
-            '<div class="muestra-card-cancion">en ' + escapeHtml(e.aparece_en.cancion || "(varias)") +
-              (e.aparece_en.disco && !String(e.aparece_en.disco).startsWith("(") ? " · " + escapeHtml(e.aparece_en.disco) : "") +
-            '</div>' +
-          '</div>'
-        ).join("");
-        grid.addEventListener("click", (ev) => {
-          const card = ev.target.closest(".muestra-card");
-          if (!card) return;
-          window.location.href = "glosario.html#" + card.dataset.id;
-        });
-      }
-    } catch (e) { console.error("[home]", e); }
-  };
+      entradas = await SUPA.listarEntradasGlosario();
+      cargar.entradas = entradas;
+    } catch (e) {
+      const cont = document.getElementById("stat-entradas");
+      if (cont) cont.textContent = "?";
+      return;
+    }
+    const elEnt = document.getElementById("stat-entradas");
+    const elDisc = document.getElementById("stat-discos");
+    const elFnt = document.getElementById("stat-fuentes");
+    if (elEnt) elEnt.textContent = entradas.length;
+    if (elDisc) {
+      const discos = new Set(entradas.map(e => e.disco).filter(Boolean));
+      elDisc.textContent = discos.size;
+    }
+    if (elFnt) {
+      let n = 0;
+      entradas.forEach(e => { if (Array.isArray(e.fuentes)) n += e.fuentes.length; });
+      elFnt.textContent = n;
+    }
+    const grid = document.getElementById("muestra-grid");
+    if (grid) {
+      const elegidas = ["barbazul", "kristallnacht", "ji-ji-ji"].map(s => entradas.find(e => e.id === s)).filter(Boolean).slice(0, 3);
+      const fallback = entradas.slice(0, 3);
+      const sample = elegidas.length ? elegidas : fallback;
+      grid.innerHTML = sample.map(e =>
+        '<a class="muestra-card muestra-card-term" href="glosario.html#e=' + esc(e.id) + '">' +
+          '<h3>' + esc(e.termino) + '</h3>' +
+          '<p class="muestra-meta">' + esc(e.cancion || "") + (e.disco ? ' · ' + esc(e.disco) : '') + (e.anio ? ' · ' + e.anio : '') + '</p>' +
+          '<p class="muestra-def">' + esc((e.que_es || "").slice(0, 140)) + ((e.que_es || "").length > 140 ? "…" : "") + '</p>' +
+        '</a>'
+      ).join("");
+    }
+  }
 
-  MUH.hidratarGlosario = async function () {
-    try {
-      const d = await cargar();
-      const cont = document.getElementById("entradas-cont");
-      const contador = document.getElementById("contador-resultados");
-      const inputBuscar = document.getElementById("filtro-buscar");
-      const selTipo = document.getElementById("filtro-tipo");
-      const selDisco = document.getElementById("filtro-disco");
-      const selConfianza = document.getElementById("filtro-confianza");
-      const tipos = [...new Set(d.entradas.map(e => e.tipo))].sort();
-      tipos.forEach(t => {
-        const o = document.createElement("option");
-        o.value = t; o.textContent = TIPO_LABEL[t] || t;
-        selTipo.appendChild(o);
-      });
-      const discos = [...new Set(d.entradas.map(e => e.aparece_en.disco).filter(x => x && !String(x).startsWith("(")))].sort();
-      discos.forEach(disco => {
-        const o = document.createElement("option");
-        o.value = disco; o.textContent = disco;
-        selDisco.appendChild(o);
-      });
-      function renderizar() {
-        const q = (inputBuscar.value || "").toLowerCase().trim();
-        const tipo = selTipo.value;
-        const disco = selDisco.value;
-        const conf = selConfianza.value;
-        const filtradas = d.entradas.filter(e => {
-          if (tipo && e.tipo !== tipo) return false;
-          if (disco && e.aparece_en.disco !== disco) return false;
-          if (conf && e.confianza !== conf) return false;
-          if (q) {
-            const hay = [e.termino, e.que_es, e.aparece_en.cancion, e.aparece_en.disco, e.aparece_en.verso || ""].join(" ").toLowerCase();
-            if (!hay.includes(q)) return false;
-          }
-          return true;
-        });
-        contador.textContent = filtradas.length + " " + (filtradas.length === 1 ? "entrada" : "entradas");
-        cont.innerHTML = filtradas.map(e =>
-          '<div class="entrada-card" data-id="' + escapeAttr(e.id) + '">' +
-            '<div class="tipo-tag">' + escapeHtml(TIPO_LABEL[e.tipo] || e.tipo) + '</div>' +
-            '<div class="termino">' + escapeHtml(e.termino) + '</div>' +
-            '<div class="cancion">' + escapeHtml(e.aparece_en.cancion || "(varias)") +
-              (e.aparece_en.disco && !String(e.aparece_en.disco).startsWith("(") ? " · " + escapeHtml(e.aparece_en.disco) : "") +
-              (e.aparece_en.anio ? " (" + e.aparece_en.anio + ")" : "") +
-            '</div>' +
-            '<div class="resumen">' + escapeHtml(e.que_es.slice(0, 220)) + (e.que_es.length > 220 ? "…" : "") + '</div>' +
-            (e.confianza === "media" ? '<div class="confianza-media">Confianza media</div>' : "") +
-          '</div>'
-        ).join("");
-      }
-      inputBuscar.addEventListener("input", renderizar);
-      selTipo.addEventListener("change", renderizar);
-      selDisco.addEventListener("change", renderizar);
-      selConfianza.addEventListener("change", renderizar);
-      cont.addEventListener("click", (ev) => {
-        const card = ev.target.closest(".entrada-card");
-        if (!card) return;
-        abrirModal(card.dataset.id);
-      });
-      renderizar();
-      if (window.location.hash) {
-        const id = window.location.hash.replace("#", "");
-        if (d.entradas.find(e => e.id === id)) setTimeout(() => abrirModal(id), 200);
-      }
-    } catch (e) { console.error("[glosario]", e); }
-  };
+  // -------- glosario --------
+  function renderEstado(cont, msg) { if (cont) cont.innerHTML = '<p style="opacity:.7; padding:20px 0;">' + esc(msg) + '</p>'; }
 
-  async function abrirModal(id) {
-    if (!GLOSARIO) return;
-    const e = GLOSARIO.entradas.find(x => x.id === id);
-    if (!e) return;
+  function cardEntradaHtml(e) {
+    return (
+      '<a class="entrada-card" data-id="' + esc(e.id) + '" href="glosario.html#e=' + esc(e.id) + '">' +
+        '<h3>' + esc(e.termino) + '</h3>' +
+        (e.verso ? '<blockquote class="verso">"' + esc(e.verso) + '"</blockquote>' : '') +
+        '<p class="que-es">' + esc((e.que_es || "").slice(0, 220)) + ((e.que_es || "").length > 220 ? "…" : "") + '</p>' +
+        '<p class="meta-entrada">' +
+          (e.cancion ? '<span class="tag tag-cancion">' + esc(e.cancion) + '</span>' : '') +
+          (e.disco ? '<span class="tag tag-disco">' + esc(e.disco) + (e.anio ? " · " + e.anio : "") + '</span>' : '') +
+          (e.tipo ? '<span class="tag tag-tipo">' + esc(String(e.tipo).replace(/_/g, " ")) + '</span>' : '') +
+        '</p>' +
+      '</a>'
+    );
+  }
+
+  async function hidratarGlosario() {
+    const cont = document.getElementById("entradas-cont");
+    const fBuscar = document.getElementById("filtro-buscar");
+    const fTipo = document.getElementById("filtro-tipo");
+    const fDisco = document.getElementById("filtro-disco");
+    const fConf = document.getElementById("filtro-confianza");
+    const contador = document.getElementById("contador-resultados");
+    if (!cont) return;
+
+    let entradas;
+    try { entradas = await SUPA.listarEntradasGlosario(); cargar.entradas = entradas; }
+    catch (e) { renderEstado(cont, "No pude cargar el glosario: " + e.message); return; }
+
+    if (fDisco) {
+      const discos = Array.from(new Set(entradas.map(e => e.disco).filter(Boolean))).sort();
+      discos.forEach(d => {
+        const o = document.createElement("option");
+        o.value = d; o.textContent = d;
+        fDisco.appendChild(o);
+      });
+    }
+
+    function renderizar() {
+      const q = (fBuscar && fBuscar.value || "").trim().toLowerCase();
+      const t = fTipo && fTipo.value || "";
+      const d = fDisco && fDisco.value || "";
+      const c = fConf && fConf.value || "";
+      const lista = entradas.filter(e => {
+        if (t && e.tipo !== t) return false;
+        if (d && e.disco !== d) return false;
+        if (c && e.confianza !== c) return false;
+        if (q) {
+          const hay = ((e.termino || "") + " " + (e.que_es || "") + " " + (e.verso || "") + " " + (e.cancion || "")).toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+      if (contador) contador.textContent = lista.length + " entrada" + (lista.length === 1 ? "" : "s");
+      if (lista.length === 0) { cont.innerHTML = '<p style="opacity:.7;">Sin resultados con esos filtros.</p>'; return; }
+      cont.innerHTML = lista.map(cardEntradaHtml).join("");
+      cont.querySelectorAll(".entrada-card").forEach(a => {
+        a.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          abrirModalEntrada(a.dataset.id);
+        });
+      });
+    }
+
+    if (fBuscar) fBuscar.addEventListener("input", renderizar);
+    if (fTipo) fTipo.addEventListener("change", renderizar);
+    if (fDisco) fDisco.addEventListener("change", renderizar);
+    if (fConf) fConf.addEventListener("change", renderizar);
+    renderizar();
+
+    // si la url tiene #e=<id>, abrir modal
+    if (location.hash && location.hash.indexOf("#e=") === 0) {
+      const id = decodeURIComponent(location.hash.slice(3));
+      setTimeout(() => abrirModalEntrada(id), 50);
+    }
+  }
+
+  // -------- modal entrada --------
+  async function abrirModalEntrada(id) {
     const back = document.getElementById("modal-back");
     const body = document.getElementById("modal-body");
-    body.innerHTML =
+    if (!back || !body) return;
+    body.innerHTML = '<p>Cargando…</p>';
+    back.classList.add("abierto");
+    const e = (cargar.entradas || []).find(x => x.id === id) || await SUPA.obtenerEntradaGlosario(id);
+    if (!e) { body.innerHTML = '<p>Entrada no encontrada.</p>'; return; }
+    const fuentesHtml = (e.fuentes || []).map(f => {
+      const lbl = f.tipo ? f.tipo.replace(/_/g, " ") : "fuente";
+      return '<li><span class="fuente-tipo">' + esc(lbl) + '</span> <a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a></li>';
+    }).join("");
+    const cancionSlug = e.cancion ? slugify(e.cancion) : null;
+    body.innerHTML = (
       '<button class="modal-cerrar" aria-label="Cerrar">×</button>' +
-      '<div class="modal-tipo">' + escapeHtml(TIPO_LABEL[e.tipo] || e.tipo) + '</div>' +
-      '<h2>' + escapeHtml(e.termino) + '</h2>' +
-      (e.confianza === "media" ? '<div class="confianza-media-banner">Esta entrada está en <strong>confianza media</strong>: la referencia es real y citable, pero la documentación externa no es lo suficientemente firme como para subirla a confianza alta.</div>' : "") +
-      '<section><h4>Aparece en</h4>' +
-        '<div><strong>' + escapeHtml(e.aparece_en.cancion || "(varias)") + '</strong>' +
-          (e.aparece_en.disco && !String(e.aparece_en.disco).startsWith("(") ? ' · <em>' + escapeHtml(e.aparece_en.disco) + '</em>' : "") +
-          (e.aparece_en.anio ? ' (' + e.aparece_en.anio + ')' : "") +
-        '</div>' +
-        (e.aparece_en.banda ? '<div style="color:var(--ink-dim); font-size:.88rem;">' + escapeHtml(e.aparece_en.banda) + '</div>' : "") +
-        (e.aparece_en.verso && !String(e.aparece_en.verso).startsWith("(") ? '<div class="verso">' + escapeHtml(e.aparece_en.verso) + '</div>' : '<div style="color:var(--ink-dim); font-size:.9rem; margin-top:8px;">' + escapeHtml(e.aparece_en.verso || "(referencia en el título / posición especial)") + '</div>') +
-      '</section>' +
-      '<section><h4>Qué es</h4><div class="que-es">' + escapeHtml(e.que_es) + '</div></section>' +
-      (e.contemporaneidad ? '<section><h4>Contemporaneidad</h4><div>' + escapeHtml(e.contemporaneidad) + '</div></section>' : "") +
-      '<section><h4>Fuentes</h4><ul class="fuentes">' +
-        (e.fuentes || []).map(f =>
-          '<li>' +
-            '<span class="fuente-tipo">' + escapeHtml(FUENTE_LABEL[f.tipo] || f.tipo) + '</span> ' +
-            '<a href="' + escapeAttr(f.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(f.url.replace(/^https?:\/\//, "")) + '</a>' +
-            (f.descripcion ? '<div style="color:var(--ink-dim); font-size:.84rem; margin-top:4px;">' + escapeHtml(f.descripcion) + '</div>' : "") +
-          '</li>'
-        ).join("") +
-      '</ul></section>';
+      '<h2>' + esc(e.termino) + '</h2>' +
+      '<p class="modal-meta">' +
+        (e.cancion ? '<a class="modal-meta-cancion" href="cancion.html?slug=' + esc(cancionSlug || "") + '">' + esc(e.cancion) + '</a>' : '') +
+        (e.disco ? ' · ' + esc(e.disco) : '') +
+        (e.anio ? ' · ' + e.anio : '') +
+        (e.banda ? ' · <em>' + esc(e.banda) + '</em>' : '') +
+      '</p>' +
+      (e.verso ? '<blockquote class="verso-modal">"' + esc(e.verso) + '"</blockquote>' : '') +
+      '<div class="que-es-modal">' + esc(e.que_es || "").replace(/\n+/g, "<br><br>") + '</div>' +
+      (fuentesHtml ? '<h3>Fuentes</h3><ul class="fuentes">' + fuentesHtml + '</ul>' : '') +
+      (e.confianza ? '<p class="confianza-pill">Confianza: <strong>' + esc(e.confianza) + '</strong></p>' : '')
+    );
     body.querySelector(".modal-cerrar").addEventListener("click", cerrarModal);
-    back.classList.add("open");
-    back.addEventListener("click", (ev) => { if (ev.target === back) cerrarModal(); });
-    document.addEventListener("keydown", escListener);
+    back.addEventListener("click", function backClick(ev) { if (ev.target === back) { cerrarModal(); back.removeEventListener("click", backClick); } });
   }
-
   function cerrarModal() {
     const back = document.getElementById("modal-back");
-    if (back) back.classList.remove("open");
-    document.removeEventListener("keydown", escListener);
-    if (window.location.hash) history.replaceState(null, "", window.location.pathname + window.location.search);
+    if (back) back.classList.remove("abierto");
+    if (location.hash.indexOf("#e=") === 0) history.replaceState({}, "", location.pathname + location.search);
   }
-  function escListener(ev) { if (ev.key === "Escape") cerrarModal(); }
 
-  MUH.hidratarCanciones = async function () {
-    try {
-      const d = await cargar();
-      const cont = document.getElementById("canciones-cont");
-      const porCancion = {};
-      d.entradas.forEach(e => {
-        const cancion = e.aparece_en.cancion;
-        if (!cancion || String(cancion).startsWith("(")) return;
-        const key = cancion + "||" + (e.aparece_en.disco || "");
-        if (!porCancion[key]) porCancion[key] = { cancion, disco: e.aparece_en.disco, anio: e.aparece_en.anio, banda: e.aparece_en.banda, entradas: [] };
-        porCancion[key].entradas.push(e);
-      });
-      const canciones = Object.values(porCancion).sort((a, b) => {
-        if ((a.anio || 0) !== (b.anio || 0)) return (a.anio || 0) - (b.anio || 0);
-        return a.cancion.localeCompare(b.cancion);
-      });
-      cont.innerHTML = canciones.map(c =>
-        '<div class="cancion-card" data-cancion="' + escapeAttr(c.cancion) + '">' +
-          '<div class="titulo">' + escapeHtml(c.cancion) + '</div>' +
-          '<div class="meta">' +
-            (c.disco && !String(c.disco).startsWith("(") ? '<span class="disco">' + escapeHtml(c.disco) + '</span>' : "") +
-            (c.anio ? ' · ' + c.anio : "") +
-            (c.banda ? ' · <span class="banda">' + escapeHtml(c.banda) + '</span>' : "") +
-          '</div>' +
-          '<div class="refs">' + c.entradas.length + ' ' + (c.entradas.length === 1 ? "referencia" : "referencias") + ': ' +
-            c.entradas.slice(0, 4).map(e => escapeHtml(e.termino.split(" (")[0])).join(" · ") +
-            (c.entradas.length > 4 ? " · …" : "") +
-          '</div>' +
-        '</div>'
-      ).join("");
-      cont.addEventListener("click", (ev) => {
-        const card = ev.target.closest(".cancion-card");
-        if (!card) return;
-        window.location.href = "cancion.html?c=" + encodeURIComponent(card.dataset.cancion);
-      });
-    } catch (e) { console.error("[canciones]", e); }
-  };
+  // -------- discografía --------
+  async function hidratarDiscografia() {
+    const cont = document.getElementById("discografia-cont");
+    if (!cont) return;
+    cont.innerHTML = "Cargando…";
+    let canciones;
+    try { canciones = await SUPA.listarCanciones(); cargar.canciones = canciones; }
+    catch (e) { renderEstado(cont, "No pude cargar la discografía: " + e.message); return; }
 
-  MUH.hidratarEspacios = async function () {
-    if (!window.MUH_SUPA) return;
-    try {
-      const espacios = await MUH_SUPA.listarEspacios();
-      const cont = document.getElementById("espacios-cont");
-      const tematicos = espacios.filter(e => e.tipo === "tematico");
-      const geograficos = espacios.filter(e => e.tipo === "geografico");
-      const renderCard = e =>
-        '<div class="cancion-card" data-slug="' + escapeAttr(e.slug) + '">' +
-          '<div class="titulo">' + escapeHtml(e.nombre) + '</div>' +
-          '<div class="meta">' + escapeHtml(e.descripcion || (e.region_pais ? e.region_pais + (e.region_ciudad ? " · " + e.region_ciudad : "") : "")) + '</div>' +
-        '</div>';
-      cont.innerHTML =
-        '<section style="margin-bottom: 36px;"><h2>Espacios temáticos</h2><div class="canciones-lista">' + tematicos.map(renderCard).join("") + '</div></section>' +
-        '<section><h2>Espacios por ciudad</h2><p class="lead" style="color:var(--ink-soft); margin-bottom: 16px;">Ricoteros de cada rincón. Si tu ciudad no está, podés proponerla.</p><div class="canciones-lista">' + geograficos.map(renderCard).join("") + '</div></section>';
-      cont.addEventListener("click", (ev) => {
-        const card = ev.target.closest(".cancion-card");
-        if (!card) return;
-        window.location.href = "espacio.html?s=" + encodeURIComponent(card.dataset.slug);
-      });
-    } catch (e) { console.error("[espacios]", e); }
-  };
+    // Agrupar por banda → disco
+    const porBanda = {};
+    canciones.forEach(c => {
+      const b = c.banda || "(sin banda)";
+      const d = c.disco || (c.es_inedita ? "Inéditos / no publicados" : "Singles");
+      if (!porBanda[b]) porBanda[b] = {};
+      if (!porBanda[b][d]) porBanda[b][d] = { anio: c.anio, canciones: [] };
+      porBanda[b][d].canciones.push(c);
+      if (c.anio && (!porBanda[b][d].anio || c.anio < porBanda[b][d].anio)) porBanda[b][d].anio = c.anio;
+    });
 
-  MUH.hidratarTributos = async function () {
-    if (!window.MUH_SUPA) return;
+    const orden = [
+      "Patricio Rey y sus Redonditos de Ricota",
+      "Indio Solari y Los Fundamentalistas del Aire Acondicionado",
+      "El Mister y Los Marsupiales Extintos feat. Indio Solari"
+    ];
+    const bandas = Object.keys(porBanda).sort((a, b) => {
+      const ia = orden.indexOf(a), ib = orden.indexOf(b);
+      if (ia === -1 && ib === -1) return a.localeCompare(b);
+      if (ia === -1) return 1;
+      if (ib === -1) return -1;
+      return ia - ib;
+    });
+
+    cont.innerHTML = bandas.map(b => {
+      const discosObj = porBanda[b];
+      const discos = Object.keys(discosObj).sort((x, y) => {
+        const ax = discosObj[x].anio || 9999, ay = discosObj[y].anio || 9999;
+        return ax - ay;
+      });
+      return (
+        '<section class="banda-block">' +
+          '<h2 class="banda-nombre">' + esc(b) + '</h2>' +
+          discos.map(d => {
+            const data = discosObj[d];
+            const slugDisco = slugify(b) + "-" + slugify(d);
+            return (
+              '<a class="disco-card" href="disco.html?banda=' + encodeURIComponent(b) + '&disco=' + encodeURIComponent(d) + '">' +
+                '<div class="disco-title">' +
+                  '<h3>' + esc(d) + '</h3>' +
+                  '<p class="disco-meta">' + (data.anio ? data.anio + " · " : "") + data.canciones.length + " tema" + (data.canciones.length === 1 ? "" : "s") + '</p>' +
+                '</div>' +
+              '</a>'
+            );
+          }).join("") +
+        '</section>'
+      );
+    }).join("");
+  }
+
+  // -------- disco (tracklist) --------
+  async function hidratarDisco() {
+    const cont = document.getElementById("disco-cont");
+    const titulo = document.getElementById("disco-titulo");
+    const meta = document.getElementById("disco-meta");
+    if (!cont) return;
+    const p = new URLSearchParams(location.search);
+    const banda = p.get("banda");
+    const disco = p.get("disco");
+    if (!banda || !disco) {
+      cont.innerHTML = '<p>Falta indicar disco. <a href="discografia.html">Ver discografía</a>.</p>';
+      return;
+    }
+    let canciones;
+    try { canciones = await SUPA.listarCanciones(); }
+    catch (e) { renderEstado(cont, "No pude cargar: " + e.message); return; }
+    const delDisco = canciones.filter(c => {
+      const d = c.disco || (c.es_inedita ? "Inéditos / no publicados" : "Singles");
+      return c.banda === banda && d === disco;
+    });
+    if (delDisco.length === 0) {
+      cont.innerHTML = '<p>No encontré canciones para ese disco.</p>';
+      return;
+    }
+    const anio = delDisco[0].anio;
+    if (titulo) titulo.textContent = disco;
+    if (meta) meta.innerHTML = esc(banda) + (anio ? " · " + anio : "");
+    cont.innerHTML = (
+      '<ol class="tracklist">' +
+      delDisco.map((c, i) => (
+        '<li class="track">' +
+          '<a href="cancion.html?slug=' + esc(c.slug) + '">' +
+            '<span class="track-num">' + (i + 1) + '</span>' +
+            '<span class="track-title">' + esc(c.titulo) + '</span>' +
+            (c.video_youtube_url ? '<span class="track-flag flag-video" title="Con video">▶</span>' : '') +
+            (c.letra_completa ? '<span class="track-flag flag-letra" title="Con letra">♪</span>' : '') +
+          '</a>' +
+        '</li>'
+      )).join("") +
+      '</ol>'
+    );
+  }
+
+  // -------- canción (video + letra + glosario destacado) --------
+  async function hidratarCancion() {
+    const cont = document.getElementById("cancion-cont");
+    const tituloEl = document.getElementById("cancion-titulo");
+    const metaEl = document.getElementById("cancion-meta");
+    const videoEl = document.getElementById("cancion-video");
+    const letraEl = document.getElementById("cancion-letra");
+    const entradasEl = document.getElementById("cancion-entradas");
+    const notasEl = document.getElementById("cancion-notas");
+    if (!cont) return;
+    const p = new URLSearchParams(location.search);
+    const slug = p.get("slug") || p.get("c");
+    if (!slug) {
+      cont.innerHTML = '<p>No indicaste qué canción. <a href="discografia.html">Ver discografía</a>.</p>';
+      return;
+    }
+    let c;
+    try { c = await SUPA.obtenerCancionPorSlug(slug); }
+    catch (e) { cont.innerHTML = '<p>No pude cargar: ' + esc(e.message) + '</p>'; return; }
+    if (!c) {
+      // fallback: buscar por título decodificado
+      const canciones = await SUPA.listarCanciones();
+      c = canciones.find(x => slugify(x.titulo) === slug);
+    }
+    if (!c) { cont.innerHTML = '<p>Canción no encontrada.</p>'; return; }
+
+    if (tituloEl) tituloEl.textContent = c.titulo;
+    if (metaEl) {
+      const partes = [];
+      if (c.disco) partes.push(c.disco);
+      if (c.anio) partes.push(String(c.anio));
+      if (c.banda) partes.push(c.banda);
+      metaEl.textContent = partes.join(" · ");
+    }
+    if (notasEl) {
+      if (c.notas) notasEl.innerHTML = '<p class="nota-cancion"><strong>Nota:</strong> ' + esc(c.notas) + '</p>';
+      else notasEl.innerHTML = "";
+    }
+    if (videoEl) {
+      const vid = youtubeIdDeUrl(c.video_youtube_url);
+      if (vid) {
+        videoEl.innerHTML = '<div class="yt-embed"><iframe src="https://www.youtube.com/embed/' + vid + '" title="' + esc(c.titulo) + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+      } else if (c.video_youtube_url) {
+        videoEl.innerHTML = '<p><a class="cta-secondary" href="' + esc(c.video_youtube_url) + '" target="_blank" rel="noopener">Ver en YouTube</a></p>';
+      } else {
+        videoEl.innerHTML = '<p class="placeholder">Video oficial pendiente. <a href="https://www.youtube.com/results?search_query=' + encodeURIComponent((c.banda || "") + " " + c.titulo) + '" target="_blank" rel="noopener">Buscar en YouTube</a></p>';
+      }
+    }
+
+    // letra + glosario destacado
+    let entradasDeCancion = [];
+    try { entradasDeCancion = await SUPA.listarEntradasDeCancion(c.id); } catch (e) {}
+
+    if (letraEl) {
+      if (c.letra_completa) {
+        const letra = c.letra_completa;
+        const html = destacarPalabrasEnLetra(letra, entradasDeCancion);
+        letraEl.innerHTML = (
+          '<pre class="letra">' + html + '</pre>' +
+          (c.fuente_letra_url ? '<p class="fuente-letra">Letra de <a href="' + esc(c.fuente_letra_url) + '" target="_blank" rel="noopener">' + esc(c.fuente_letra_url) + '</a></p>' : '')
+        );
+        // bind clicks
+        letraEl.querySelectorAll(".glosario-link").forEach(a => {
+          a.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            abrirModalEntrada(a.dataset.id);
+          });
+        });
+      } else {
+        letraEl.innerHTML = '<p class="placeholder">Letra completa pendiente de carga. ' + (c.fuente_letra_url ? '<a href="' + esc(c.fuente_letra_url) + '" target="_blank" rel="noopener">Verla mientras tanto</a>.' : '') + '</p>';
+      }
+    }
+
+    if (entradasEl) {
+      if (entradasDeCancion.length === 0) {
+        entradasEl.innerHTML = '<p class="placeholder">Esta canción todavía no tiene entradas del glosario.</p>';
+      } else {
+        entradasEl.innerHTML = '<h3>Palabras del glosario en esta canción (' + entradasDeCancion.length + ')</h3>' +
+          '<div class="entradas-grid">' + entradasDeCancion.map(cardEntradaHtml).join("") + '</div>';
+        entradasEl.querySelectorAll(".entrada-card").forEach(a => {
+          a.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            abrirModalEntrada(a.dataset.id);
+          });
+        });
+      }
+    }
+
+    // si la url tiene #e=, abrir modal
+    if (location.hash && location.hash.indexOf("#e=") === 0) {
+      const id = decodeURIComponent(location.hash.slice(3));
+      setTimeout(() => abrirModalEntrada(id), 50);
+    }
+  }
+
+  function destacarPalabrasEnLetra(letra, entradas) {
+    // entradas con su término ordenadas por longitud descendente para matchear primero las más largas
+    const ordenadas = (entradas || []).slice().sort((a, b) => (b.termino || "").length - (a.termino || "").length);
+    let html = esc(letra);
+    ordenadas.forEach(e => {
+      const term = e.termino;
+      if (!term) return;
+      // tomamos varios "anclajes": el término, primera palabra alfanumérica, o frase del verso citado
+      const candidatos = [];
+      candidatos.push(term);
+      // si el verso del glosario tiene una sub-frase corta, intentamos esa
+      if (e.verso) {
+        const versoLimpio = e.verso.split(/[.,;:¡!¿?\n]/)[0].trim();
+        if (versoLimpio && versoLimpio.length < 60) candidatos.push(versoLimpio);
+      }
+      let reemplazado = false;
+      for (const cand of candidatos) {
+        const escCand = cand.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const re = new RegExp("(\\b|^)(" + escCand + ")(\\b|$)", "i");
+        if (re.test(html)) {
+          html = html.replace(re, function (m, p1, p2, p3) {
+            return p1 + '<a class="glosario-link" href="#e=' + esc(e.id) + '" data-id="' + esc(e.id) + '" title="' + esc(e.termino) + '">' + p2 + '</a>' + p3;
+          });
+          reemplazado = true;
+          break;
+        }
+      }
+    });
+    return html;
+  }
+
+  // -------- canciones (listado simple, igual que antes) --------
+  async function hidratarCanciones() {
+    const cont = document.getElementById("canciones-cont");
+    if (!cont) return;
+    cont.innerHTML = "Cargando…";
+    let canciones;
+    try { canciones = await SUPA.listarCanciones(); cargar.canciones = canciones; }
+    catch (e) { renderEstado(cont, "No pude cargar: " + e.message); return; }
+    // Solo mostrar las que tienen entradas del glosario asociadas (para no abrumar)
+    let entradas;
+    try { entradas = cargar.entradas || await SUPA.listarEntradasGlosario(); } catch (e) { entradas = []; }
+    const cancionIds = new Set(entradas.map(e => e.cancion_id).filter(Boolean));
+    const lista = canciones.filter(c => cancionIds.has(c.id));
+    lista.sort((a, b) => (a.anio || 9999) - (b.anio || 9999) || (a.titulo || "").localeCompare(b.titulo || ""));
+    cont.innerHTML = lista.map(c => {
+      const n = entradas.filter(e => e.cancion_id === c.id).length;
+      return (
+        '<a class="cancion-card" href="cancion.html?slug=' + esc(c.slug) + '">' +
+          '<h3>' + esc(c.titulo) + '</h3>' +
+          '<p class="cancion-meta">' + esc(c.disco || (c.es_inedita ? "Inédita" : "Single")) + (c.anio ? " · " + c.anio : "") + " · " + esc(c.banda) + '</p>' +
+          '<p class="cancion-glosa">' + n + " referencia" + (n === 1 ? "" : "s") + " del glosario</p>" +
+          (c.video_youtube_url ? '<span class="cancion-flag">▶ con video</span>' : '') +
+          (c.letra_completa ? '<span class="cancion-flag">♪ con letra</span>' : '') +
+        '</a>'
+      );
+    }).join("");
+  }
+
+  async function listarEspaciosUI() {
+    const cont = document.getElementById("espacios-cont");
+    if (!cont) return;
     try {
-      const lista = await MUH_SUPA.listarTributos();
-      const cont = document.getElementById("tributos-cont");
-      if (!lista.length) {
-        cont.innerHTML = '<p style="color:var(--ink-soft);">Todavía no hay tributos cargados. <a href="proponer-tributo.html">¿Conocés una banda tributo? Sumala.</a></p>';
+      const arr = await SUPA.listarEspacios();
+      cont.innerHTML = arr.map(s => (
+        '<a class="espacio-card" href="espacio.html?s=' + esc(s.slug) + '">' +
+          '<h3>' + esc(s.nombre) + '</h3>' +
+          '<p>' + esc(s.descripcion || "") + '</p>' +
+          (s.tipo ? '<span class="tag tag-tipo-espacio">' + esc(s.tipo) + '</span>' : '') +
+          (s.region_pais ? '<span class="tag">' + esc(s.region_pais) + (s.region_ciudad ? " · " + esc(s.region_ciudad) : "") + '</span>' : '') +
+        '</a>'
+      )).join("");
+    } catch (e) { renderEstado(cont, "No pude cargar: " + e.message); }
+  }
+
+  async function hidratarEspacios() { return listarEspaciosUI(); }
+
+  async function hidratarTributos() {
+    const cont = document.getElementById("tributos-cont");
+    if (!cont) return;
+    try {
+      const arr = await SUPA.listarTributos();
+      if (arr.length === 0) {
+        cont.innerHTML = '<p>Todavía no hay bandas tributo cargadas. ¿<a href="proponer-tributo.html">Conocés una?</a></p>';
         return;
       }
-      const porPais = {};
-      lista.forEach(t => { if (!porPais[t.pais]) porPais[t.pais] = []; porPais[t.pais].push(t); });
-      cont.innerHTML = Object.keys(porPais).sort().map(pais =>
-        '<section style="margin-bottom: 36px;"><h2>' + escapeHtml(pais) + '</h2><div class="canciones-lista">' +
-          porPais[pais].map(t =>
-            '<div class="cancion-card">' +
-              '<div class="titulo">' + escapeHtml(t.nombre) + '</div>' +
-              '<div class="meta">' + escapeHtml(t.ciudad) + '</div>' +
-              (t.descripcion ? '<div class="refs">' + escapeHtml(t.descripcion) + '</div>' : "") +
-            '</div>'
-          ).join("") +
-        '</div></section>'
-      ).join("");
-    } catch (e) { console.error("[tributos]", e); }
-  };
+      cont.innerHTML = arr.map(t => (
+        '<div class="tributo-card">' +
+          '<h3>' + esc(t.nombre) + '</h3>' +
+          '<p>' + esc(t.ciudad) + ', ' + esc(t.pais) + '</p>' +
+          (t.descripcion ? '<p>' + esc(t.descripcion) + '</p>' : '') +
+          '<p class="tributo-links">' +
+            (t.instagram_url ? '<a href="' + esc(t.instagram_url) + '" target="_blank" rel="noopener">Instagram</a> ' : '') +
+            (t.facebook_url ? '<a href="' + esc(t.facebook_url) + '" target="_blank" rel="noopener">Facebook</a> ' : '') +
+            (t.youtube_url ? '<a href="' + esc(t.youtube_url) + '" target="_blank" rel="noopener">YouTube</a> ' : '') +
+          '</p>' +
+        '</div>'
+      )).join("");
+    } catch (e) { renderEstado(cont, "No pude cargar: " + e.message); }
+  }
 
-  function escapeHtml(s) {
-    if (s == null) return "";
-    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-  }
-  function escapeAttr(s) { if (s == null) return ""; return String(s).replace(/"/g, "&quot;"); }
-  function sampleVariado(arr, n) {
-    const porTipo = {};
-    arr.forEach(e => { if (!porTipo[e.tipo]) porTipo[e.tipo] = []; porTipo[e.tipo].push(e); });
-    const tipos = Object.keys(porTipo);
-    const out = []; let i = 0;
-    while (out.length < n && tipos.length) {
-      const tipo = tipos[i % tipos.length];
-      if (porTipo[tipo].length) {
-        const idx = Math.floor(Math.random() * porTipo[tipo].length);
-        out.push(porTipo[tipo].splice(idx, 1)[0]);
-      } else tipos.splice(i % tipos.length, 1);
-      i++;
-    }
-    return out;
-  }
+  window.MUH = {
+    cargar: cargar,
+    hidratarTopbar: hidratarTopbar,
+    hidratarHome: hidratarHome,
+    hidratarGlosario: hidratarGlosario,
+    hidratarCanciones: hidratarCanciones,
+    hidratarEspacios: hidratarEspacios,
+    hidratarTributos: hidratarTributos,
+    hidratarDiscografia: hidratarDiscografia,
+    hidratarDisco: hidratarDisco,
+    hidratarCancion: hidratarCancion,
+    abrirModalEntrada: abrirModalEntrada,
+    slugify: slugify
+  };
 })();

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0e0d0c">
-<title>Canciones con entradas — Mi único héroe</title>
+<title>Disco — Mi único héroe</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="assets/styles.css?v=030">
 </head>
@@ -12,7 +12,7 @@
 <header class="topbar">
   <a href="index.html" class="brand"><span class="brand-mark">·</span><span class="brand-name">Mi único héroe</span></a>
   <nav class="topnav">
-    <a href="discografia.html">Discografía</a>
+    <a href="discografia.html" class="active">Discografía</a>
     <a href="glosario.html">Glosario</a>
     <a href="espacios.html">Espacios</a>
     <a href="tributos.html">Tributos</a>
@@ -21,13 +21,14 @@
   </nav>
 </header>
 
-<main class="glosario">
-  <header class="glosario-header">
-    <h1>Canciones con entradas del glosario</h1>
-    <p class="lead">Las canciones que ya tienen palabras analizadas. Para ver todo el catálogo entrá a la <a href="discografia.html">discografía completa</a>.</p>
-  </header>
-  <div id="canciones-cont">Cargando…</div>
+<main class="pagina">
+  <p style="margin-top:8px;"><a href="discografia.html">&larr; Volver a discografía</a></p>
+  <h1 id="disco-titulo">Cargando…</h1>
+  <p class="lead" id="disco-meta"></p>
+  <div id="disco-cont">Cargando…</div>
 </main>
+
+<div class="modal-back" id="modal-back" role="dialog" aria-modal="true"><div class="modal" id="modal-body"></div></div>
 
 <footer class="site-footer">
   <p>Sitio de fans, sin afiliación con Patricio Rey y sus Redonditos de Ricota ni con sus titulares.</p>
@@ -40,7 +41,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     MUH.hidratarTopbar();
-    MUH.hidratarCanciones();
+    MUH.hidratarDisco();
   });
 </script>
 </body>
