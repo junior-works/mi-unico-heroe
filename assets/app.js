@@ -1,13 +1,12 @@
-/* Mi único héroe — app.js v0.3.0
-   Hidratadores de páginas: home, glosario, canciones, cancion (canción con video y letra),
-   discografía, disco, espacios, tributos.
+/* Mi único héroe — app.js v0.3.3
+   Vista canción: video YouTube + link a Letras.com + entradas del glosario
+   con sus versos citados (sin letra completa por respeto a derechos).
 */
 (function () {
   if (!window.MUH_SUPA) throw new Error("MUH_SUPA no cargado");
   const SUPA = window.MUH_SUPA;
   const CFG = window.MUH_CONFIG;
 
-  // ---- caché simple en memoria ----
   const cargar = {
     entradas: null,
     canciones: null
@@ -33,7 +32,6 @@
     return m ? m[1] : null;
   }
 
-  // -------- topbar (auth slot) --------
   async function hidratarTopbar() {
     const slot = document.getElementById("auth-slot");
     if (!slot) return;
@@ -47,7 +45,6 @@
     }
   }
 
-  // -------- home --------
   async function hidratarHome() {
     SUPA.procesarRedirectHash && SUPA.procesarRedirectHash();
     let entradas;
@@ -87,7 +84,6 @@
     }
   }
 
-  // -------- glosario --------
   function renderEstado(cont, msg) { if (cont) cont.innerHTML = '<p style="opacity:.7; padding:20px 0;">' + esc(msg) + '</p>'; }
 
   function cardEntradaHtml(e) {
@@ -159,14 +155,12 @@
     if (fConf) fConf.addEventListener("change", renderizar);
     renderizar();
 
-    // si la url tiene #e=<id>, abrir modal
     if (location.hash && location.hash.indexOf("#e=") === 0) {
       const id = decodeURIComponent(location.hash.slice(3));
       setTimeout(() => abrirModalEntrada(id), 50);
     }
   }
 
-  // -------- modal entrada --------
   async function abrirModalEntrada(id) {
     const back = document.getElementById("modal-back");
     const body = document.getElementById("modal-body");
@@ -203,7 +197,6 @@
     if (location.hash.indexOf("#e=") === 0) history.replaceState({}, "", location.pathname + location.search);
   }
 
-  // -------- discografía --------
   async function hidratarDiscografia() {
     const cont = document.getElementById("discografia-cont");
     if (!cont) return;
@@ -212,7 +205,6 @@
     try { canciones = await SUPA.listarCanciones(); cargar.canciones = canciones; }
     catch (e) { renderEstado(cont, "No pude cargar la discografía: " + e.message); return; }
 
-    // Agrupar por banda → disco
     const porBanda = {};
     canciones.forEach(c => {
       const b = c.banda || "(sin banda)";
@@ -247,7 +239,6 @@
           '<h2 class="banda-nombre">' + esc(b) + '</h2>' +
           discos.map(d => {
             const data = discosObj[d];
-            const slugDisco = slugify(b) + "-" + slugify(d);
             return (
               '<a class="disco-card" href="disco.html?banda=' + encodeURIComponent(b) + '&disco=' + encodeURIComponent(d) + '">' +
                 '<div class="disco-title">' +
@@ -262,7 +253,6 @@
     }).join("");
   }
 
-  // -------- disco (tracklist) --------
   async function hidratarDisco() {
     const cont = document.getElementById("disco-cont");
     const titulo = document.getElementById("disco-titulo");
@@ -297,7 +287,7 @@
             '<span class="track-num">' + (i + 1) + '</span>' +
             '<span class="track-title">' + esc(c.titulo) + '</span>' +
             (c.video_youtube_url ? '<span class="track-flag flag-video" title="Con video">▶</span>' : '') +
-            (c.letra_completa ? '<span class="track-flag flag-letra" title="Con letra">♪</span>' : '') +
+            (c.fuente_letra_url ? '<span class="track-flag flag-letra" title="Con letra">♪</span>' : '') +
           '</a>' +
         '</li>'
       )).join("") +
@@ -305,7 +295,7 @@
     );
   }
 
-  // -------- canción (video + letra + glosario destacado) --------
+  // Vista canción: video + link a Letras.com + entradas del glosario con sus versos citados.
   async function hidratarCancion() {
     const cont = document.getElementById("cancion-cont");
     const tituloEl = document.getElementById("cancion-titulo");
@@ -325,7 +315,6 @@
     try { c = await SUPA.obtenerCancionPorSlug(slug); }
     catch (e) { cont.innerHTML = '<p>No pude cargar: ' + esc(e.message) + '</p>'; return; }
     if (!c) {
-      // fallback: buscar por título decodificado
       const canciones = await SUPA.listarCanciones();
       c = canciones.find(x => slugify(x.titulo) === slug);
     }
@@ -354,35 +343,48 @@
       }
     }
 
-    // letra + glosario destacado
     let entradasDeCancion = [];
     try { entradasDeCancion = await SUPA.listarEntradasDeCancion(c.id); } catch (e) {}
 
     if (letraEl) {
-      if (c.letra_completa) {
-        const letra = c.letra_completa;
-        const html = destacarPalabrasEnLetra(letra, entradasDeCancion);
-        letraEl.innerHTML = (
-          '<pre class="letra">' + html + '</pre>' +
-          (c.fuente_letra_url ? '<p class="fuente-letra">Letra de <a href="' + esc(c.fuente_letra_url) + '" target="_blank" rel="noopener">' + esc(c.fuente_letra_url) + '</a></p>' : '')
-        );
-        // bind clicks
-        letraEl.querySelectorAll(".glosario-link").forEach(a => {
-          a.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            abrirModalEntrada(a.dataset.id);
-          });
-        });
+      const cuerpo = [];
+      cuerpo.push('<h2>Letra y palabras del glosario</h2>');
+      cuerpo.push('<p class="placeholder" style="text-align:left;">');
+      cuerpo.push('Por respeto a los derechos de autor, no reproducimos la letra completa acá. ');
+      if (c.fuente_letra_url) {
+        cuerpo.push('La podés leer en <a href="' + esc(c.fuente_letra_url) + '" target="_blank" rel="noopener">Letras.com</a>.');
       } else {
-        letraEl.innerHTML = '<p class="placeholder">Letra completa pendiente de carga. ' + (c.fuente_letra_url ? '<a href="' + esc(c.fuente_letra_url) + '" target="_blank" rel="noopener">Verla mientras tanto</a>.' : '') + '</p>';
+        const query = encodeURIComponent((c.banda || "") + " " + c.titulo + " letra");
+        cuerpo.push('<a href="https://www.google.com/search?q=' + query + '" target="_blank" rel="noopener">Buscar la letra</a>.');
       }
+      cuerpo.push('</p>');
+      if (entradasDeCancion.length > 0) {
+        cuerpo.push('<p style="color:var(--ink-soft);">Acá te dejamos los versos donde aparecen palabras del glosario, con su explicación:</p>');
+        cuerpo.push('<ul class="versos-glosario">');
+        entradasDeCancion.forEach(e => {
+          cuerpo.push('<li class="verso-glosario">');
+          if (e.verso) {
+            cuerpo.push('<blockquote class="verso">"' + esc(e.verso) + '"</blockquote>');
+          }
+          cuerpo.push('<p class="verso-explica"><a class="glosario-link" data-id="' + esc(e.id) + '" href="#e=' + esc(e.id) + '"><strong>' + esc(e.termino) + '</strong></a> — ' + esc((e.que_es || "").slice(0, 200)) + ((e.que_es || "").length > 200 ? "…" : "") + '</p>');
+          cuerpo.push('</li>');
+        });
+        cuerpo.push('</ul>');
+      }
+      letraEl.innerHTML = cuerpo.join("");
+      letraEl.querySelectorAll(".glosario-link").forEach(a => {
+        a.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          abrirModalEntrada(a.dataset.id);
+        });
+      });
     }
 
     if (entradasEl) {
       if (entradasDeCancion.length === 0) {
-        entradasEl.innerHTML = '<p class="placeholder">Esta canción todavía no tiene entradas del glosario.</p>';
+        entradasEl.innerHTML = '<p class="placeholder">Esta canción todavía no tiene entradas del glosario. <a href="proponer.html">¿Querés proponer una?</a></p>';
       } else {
-        entradasEl.innerHTML = '<h3>Palabras del glosario en esta canción (' + entradasDeCancion.length + ')</h3>' +
+        entradasEl.innerHTML = '<h3>Todas las entradas del glosario en esta canción (' + entradasDeCancion.length + ')</h3>' +
           '<div class="entradas-grid">' + entradasDeCancion.map(cardEntradaHtml).join("") + '</div>';
         entradasEl.querySelectorAll(".entrada-card").forEach(a => {
           a.addEventListener("click", (ev) => {
@@ -393,45 +395,12 @@
       }
     }
 
-    // si la url tiene #e=, abrir modal
     if (location.hash && location.hash.indexOf("#e=") === 0) {
       const id = decodeURIComponent(location.hash.slice(3));
       setTimeout(() => abrirModalEntrada(id), 50);
     }
   }
 
-  function destacarPalabrasEnLetra(letra, entradas) {
-    // entradas con su término ordenadas por longitud descendente para matchear primero las más largas
-    const ordenadas = (entradas || []).slice().sort((a, b) => (b.termino || "").length - (a.termino || "").length);
-    let html = esc(letra);
-    ordenadas.forEach(e => {
-      const term = e.termino;
-      if (!term) return;
-      // tomamos varios "anclajes": el término, primera palabra alfanumérica, o frase del verso citado
-      const candidatos = [];
-      candidatos.push(term);
-      // si el verso del glosario tiene una sub-frase corta, intentamos esa
-      if (e.verso) {
-        const versoLimpio = e.verso.split(/[.,;:¡!¿?\n]/)[0].trim();
-        if (versoLimpio && versoLimpio.length < 60) candidatos.push(versoLimpio);
-      }
-      let reemplazado = false;
-      for (const cand of candidatos) {
-        const escCand = cand.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const re = new RegExp("(\\b|^)(" + escCand + ")(\\b|$)", "i");
-        if (re.test(html)) {
-          html = html.replace(re, function (m, p1, p2, p3) {
-            return p1 + '<a class="glosario-link" href="#e=' + esc(e.id) + '" data-id="' + esc(e.id) + '" title="' + esc(e.termino) + '">' + p2 + '</a>' + p3;
-          });
-          reemplazado = true;
-          break;
-        }
-      }
-    });
-    return html;
-  }
-
-  // -------- canciones (listado simple, igual que antes) --------
   async function hidratarCanciones() {
     const cont = document.getElementById("canciones-cont");
     if (!cont) return;
@@ -439,7 +408,6 @@
     let canciones;
     try { canciones = await SUPA.listarCanciones(); cargar.canciones = canciones; }
     catch (e) { renderEstado(cont, "No pude cargar: " + e.message); return; }
-    // Solo mostrar las que tienen entradas del glosario asociadas (para no abrumar)
     let entradas;
     try { entradas = cargar.entradas || await SUPA.listarEntradasGlosario(); } catch (e) { entradas = []; }
     const cancionIds = new Set(entradas.map(e => e.cancion_id).filter(Boolean));
@@ -453,7 +421,6 @@
           '<p class="cancion-meta">' + esc(c.disco || (c.es_inedita ? "Inédita" : "Single")) + (c.anio ? " · " + c.anio : "") + " · " + esc(c.banda) + '</p>' +
           '<p class="cancion-glosa">' + n + " referencia" + (n === 1 ? "" : "s") + " del glosario</p>" +
           (c.video_youtube_url ? '<span class="cancion-flag">▶ con video</span>' : '') +
-          (c.letra_completa ? '<span class="cancion-flag">♪ con letra</span>' : '') +
         '</a>'
       );
     }).join("");
