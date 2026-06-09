@@ -1,4 +1,4 @@
-/* Mi único héroe v0.3.0 — estilos completos */
+/* Mi único héroe v0.3.1 — estilos con logo + nav mobile fix */
 :root {
   --bg: #0e0d0c;
   --bg-soft: #1a1818;
@@ -33,44 +33,63 @@ img { max-width: 100%; height: auto; display: block; }
 /* topbar */
 .topbar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 22px; background: var(--bg-soft);
+  padding: 10px 16px; background: var(--bg-soft);
   border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
-  flex-wrap: wrap; gap: 10px;
+  gap: 10px;
 }
-.brand { display: flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 700; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 700; flex-shrink: 0; }
 .brand:hover { text-decoration: none; }
-.brand-mark {
-  display: inline-flex; width: 32px; height: 32px;
-  background: var(--accent); color: #fff;
-  border-radius: 50%; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 1.2rem;
+.brand-logo {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: url("logo-muh.png") center/cover no-repeat #0e0d0c;
+  flex-shrink: 0;
 }
 .brand-name { font-size: 1.05rem; }
-.topnav { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.topnav a { color: var(--ink-soft); font-size: .95rem; padding: 6px 0; }
+
+/* Nav: en desktop normal, en mobile scroll horizontal */
+.topnav {
+  display: flex; align-items: center; gap: 14px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  flex: 1; min-width: 0;
+  scrollbar-width: none;
+}
+.topnav::-webkit-scrollbar { display: none; }
+.topnav a {
+  color: var(--ink-soft); font-size: .95rem; padding: 6px 4px;
+  white-space: nowrap; flex-shrink: 0;
+}
 .topnav a:hover, .topnav a.active { color: var(--ink); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .topbar { padding: 8px 12px; gap: 6px; }
+  .brand-logo { width: 34px; height: 34px; }
+  .brand-name { display: none; } /* en mobile solo logo para ahorrar espacio */
+  .topnav { gap: 12px; font-size: .92rem; }
+  .topnav a { font-size: .92rem; padding: 6px 2px; }
+}
+
 .nav-mini { font-size: .9rem; }
 .link-bare { background:none; border:0; color:var(--ink-soft); cursor:pointer; font-size:.9rem; }
 
 /* hero */
 .hero {
-  padding: 60px 28px 24px;
+  padding: 50px 24px 18px;
   text-align: center; max-width: 720px; margin: 0 auto;
 }
-.hero h1 { font-family: var(--serif-stack); font-size: 2.6rem; margin: 0 0 12px; line-height: 1.1; }
-.lead { color: var(--ink-soft); font-size: 1.1rem; margin: 0 auto; max-width: 640px; }
+.hero h1 { font-family: var(--serif-stack); font-size: 2.4rem; margin: 0 0 12px; line-height: 1.1; }
+.lead { color: var(--ink-soft); font-size: 1.05rem; margin: 0 auto; max-width: 640px; }
 
 /* stats */
-.stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; padding: 24px 16px 36px; }
+.stats { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 22px 16px 30px; }
 .stat { text-align: center; }
-.stat strong { font-family: var(--serif-stack); font-size: 2.2rem; display: block; color: var(--accent-soft); }
+.stat strong { font-family: var(--serif-stack); font-size: 2.1rem; display: block; color: var(--accent-soft); }
 .stat span { color: var(--ink-mute); font-size: .85rem; }
 
 /* metodo / muestra */
 .metodo, .muestra {
-  max-width: 760px; margin: 0 auto; padding: 24px 28px;
+  max-width: 760px; margin: 0 auto; padding: 20px 24px;
 }
-.metodo h2, .muestra h2 { font-family: var(--serif-stack); font-size: 1.6rem; margin-top:24px; }
+.metodo h2, .muestra h2 { font-family: var(--serif-stack); font-size: 1.5rem; margin-top:18px; }
 .metodo p { color: var(--ink-soft); }
 
 .muestra-grid {
@@ -89,7 +108,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* CTA */
 .cta-primary, .cta-secondary {
-  display: inline-block; padding: 12px 24px; border-radius: var(--radius); font-weight: 600; cursor: pointer;
+  display: inline-block; padding: 12px 22px; border-radius: var(--radius); font-weight: 600; cursor: pointer;
   border: 1px solid transparent; text-decoration: none;
 }
 .cta-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
@@ -98,15 +117,15 @@ img { max-width: 100%; height: auto; display: block; }
 .cta-secondary:hover { border-color: var(--ink-soft); text-decoration: none; }
 
 /* página genérica */
-.pagina { max-width: 860px; margin: 0 auto; padding: 24px 22px 48px; }
-.pagina h1 { font-family: var(--serif-stack); font-size: 2rem; margin: 0 0 8px; }
-.pagina h2 { font-family: var(--serif-stack); font-size: 1.4rem; margin-top: 26px; }
+.pagina { max-width: 860px; margin: 0 auto; padding: 22px 20px 48px; }
+.pagina h1 { font-family: var(--serif-stack); font-size: 1.9rem; margin: 0 0 8px; }
+.pagina h2 { font-family: var(--serif-stack); font-size: 1.35rem; margin-top: 24px; }
 .pagina p { color: var(--ink-soft); }
 
 /* glosario */
-.glosario { max-width: 1100px; margin: 0 auto; padding: 24px 22px 48px; }
-.glosario-header h1 { font-family: var(--serif-stack); font-size: 2rem; margin: 0 0 8px; }
-.glosario-filtros { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+.glosario { max-width: 1100px; margin: 0 auto; padding: 22px 20px 48px; }
+.glosario-header h1 { font-family: var(--serif-stack); font-size: 1.9rem; margin: 0 0 8px; }
+.glosario-filtros { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 12px; margin: 22px 0; }
 @media (max-width: 700px) { .glosario-filtros { grid-template-columns: 1fr 1fr; } }
 .filtro-grupo label { font-size: .8rem; color: var(--ink-mute); display: block; margin-bottom: 4px; }
 .filtro-grupo input, .filtro-grupo select {
@@ -137,41 +156,41 @@ img { max-width: 100%; height: auto; display: block; }
 .modal-back {
   position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(4px);
   display: none; align-items: flex-start; justify-content: center;
-  z-index: 100; overflow-y: auto; padding: 40px 16px;
+  z-index: 100; overflow-y: auto; padding: 30px 12px;
 }
 .modal-back.abierto { display: flex; }
 .modal {
   background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
-  max-width: 680px; width: 100%; padding: 28px; position: relative;
+  max-width: 680px; width: 100%; padding: 26px; position: relative;
   box-shadow: var(--shadow);
 }
 .modal-cerrar {
-  position: absolute; top: 12px; right: 16px; background: none; border: 0;
+  position: absolute; top: 8px; right: 14px; background: none; border: 0;
   color: var(--ink-soft); font-size: 1.8rem; cursor: pointer; line-height: 1;
 }
-.modal h2 { font-family: var(--serif-stack); margin: 0 0 8px; color: var(--accent-soft); }
+.modal h2 { font-family: var(--serif-stack); margin: 0 0 8px; color: var(--accent-soft); padding-right: 28px; }
 .modal-meta { margin: 0 0 16px; color: var(--ink-mute); font-size: .9rem; }
 .modal-meta-cancion { color: var(--accent-soft); }
 .verso-modal { padding: 12px 16px; border-left: 3px solid var(--accent); font-style: italic; color: var(--ink); background: var(--bg-elev); border-radius: var(--radius-sm); margin: 16px 0; }
 .que-es-modal { color: var(--ink); line-height: 1.6; }
 .fuentes { padding-left: 20px; }
-.fuentes li { margin: 6px 0; word-break: break-all; }
+.fuentes li { margin: 6px 0; word-break: break-all; font-size: .9rem; }
 .fuente-tipo { display: inline-block; padding: 2px 8px; background: var(--bg-elev); border-radius: 4px; font-size: .75rem; color: var(--ink-mute); margin-right: 6px; }
 .confianza-pill { color: var(--ink-mute); font-size: .85rem; }
 
 /* discografía */
-.banda-block { margin: 32px 0; }
+.banda-block { margin: 28px 0; }
 .banda-nombre {
-  font-family: var(--serif-stack); font-size: 1.5rem;
-  border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 16px;
+  font-family: var(--serif-stack); font-size: 1.3rem;
+  border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 14px;
 }
 .disco-card {
-  display: block; padding: 16px 20px; background: var(--bg-soft);
+  display: block; padding: 14px 18px; background: var(--bg-soft);
   border: 1px solid var(--border); border-radius: var(--radius);
-  color: var(--ink); margin-bottom: 10px; transition: border-color .15s, transform .15s;
+  color: var(--ink); margin-bottom: 8px; transition: border-color .15s, transform .15s;
 }
 .disco-card:hover { border-color: var(--accent); text-decoration: none; transform: translateX(4px); }
-.disco-title h3 { margin: 0 0 4px; font-size: 1.1rem; color: var(--accent-soft); }
+.disco-title h3 { margin: 0 0 4px; font-size: 1.05rem; color: var(--accent-soft); }
 .disco-meta { margin: 0; color: var(--ink-mute); font-size: .85rem; }
 
 /* tracklist */
@@ -189,7 +208,7 @@ img { max-width: 100%; height: auto; display: block; }
 .flag-letra { color: #c8b89e; }
 
 /* canción */
-.bloque-video, .bloque-letra, .bloque-entradas { margin: 26px 0; }
+.bloque-video, .bloque-letra, .bloque-entradas { margin: 24px 0; }
 .yt-embed {
   position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
   border-radius: var(--radius); background: #000;
@@ -203,8 +222,8 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .bloque-letra h2 { font-family: var(--serif-stack); margin-top: 0; }
 .letra {
-  white-space: pre-wrap; font-family: var(--serif-stack); font-size: 1.08rem;
-  line-height: 1.75; padding: 24px; background: var(--bg-soft);
+  white-space: pre-wrap; font-family: var(--serif-stack); font-size: 1.05rem;
+  line-height: 1.75; padding: 22px; background: var(--bg-soft);
   border: 1px solid var(--border); border-radius: var(--radius);
   color: var(--ink); margin: 0;
 }
@@ -222,7 +241,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* canciones (listado con entradas) */
 .cancion-card {
-  display: block; padding: 18px; background: var(--bg-soft);
+  display: block; padding: 16px; background: var(--bg-soft);
   border: 1px solid var(--border); border-radius: var(--radius);
   margin: 10px 0; color: var(--ink); transition: border-color .15s;
 }
@@ -234,7 +253,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* espacios + tributos */
 .espacio-card, .tributo-card {
-  display: block; padding: 18px; background: var(--bg-soft);
+  display: block; padding: 16px; background: var(--bg-soft);
   border: 1px solid var(--border); border-radius: var(--radius);
   margin: 10px 0; color: var(--ink);
 }
@@ -259,7 +278,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* footer */
 .site-footer {
-  text-align: center; padding: 40px 20px 20px; color: var(--ink-mute);
+  text-align: center; padding: 36px 20px 20px; color: var(--ink-mute);
   font-size: .85rem; border-top: 1px solid var(--border); margin-top: 60px;
 }
 .footer-version { margin: 4px 0 0; font-size: .75rem; opacity: .6; }
