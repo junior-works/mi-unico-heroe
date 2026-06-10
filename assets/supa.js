@@ -55,8 +55,11 @@
     setSession(null);
   }
 
-  async function enviarMagicLink(email, redirectTo) {
-    const body = { email: email, options: { email_redirect_to: redirectTo || location.origin + location.pathname.replace(/[^/]*$/, "") } };
+  async function enviarMagicLink(email) {
+    // Hardcode absoluto con path del repo: GitHub Pages no tiene sitio en la raíz
+    // de la organización (junior-works.github.io/ da 404). La home procesa el hash
+    // del magic link vía procesarRedirectHash().
+    const body = { email: email, options: { email_redirect_to: "https://junior-works.github.io/mi-unico-heroe/" } };
     return await jfetch(AUTH + "/otp", {
       method: "POST",
       headers: { apikey: cfg.SUPABASE_ANON_KEY, "Content-Type": "application/json" },
