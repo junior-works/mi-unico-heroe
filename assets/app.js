@@ -37,7 +37,7 @@
     if (!slot) return;
     const u = await SUPA.getUsuarioActual();
     if (u) {
-      slot.innerHTML = '<a href="mi-perfil.html" class="nav-mini">Mi perfil</a> <button id="btn-salir" class="link-bare">Salir</button>';
+      slot.innerHTML = '<a href="mi-perfil.html" class="nav-mini">Mi perfil</a> <button id="btn-salir" class="link-bare">Adieu! Bye Bye!</button>';
       const b = document.getElementById("btn-salir");
       if (b) b.addEventListener("click", async () => { await SUPA.cerrarSesion(); location.href = "index.html"; });
     } else {
@@ -139,7 +139,7 @@
         return true;
       });
       if (contador) contador.textContent = lista.length + " entrada" + (lista.length === 1 ? "" : "s");
-      if (lista.length === 0) { cont.innerHTML = '<p style="opacity:.7;">Sin resultados con esos filtros.</p>'; return; }
+      if (lista.length === 0) { cont.innerHTML = '<p style="opacity:.7;">Cuando la noche es más oscura, se viene el día en tu corazón. — Probá quitar algún filtro.</p>'; return; }
       cont.innerHTML = lista.map(cardEntradaHtml).join("");
       cont.querySelectorAll(".entrada-card").forEach(a => {
         a.addEventListener("click", (ev) => {
@@ -382,7 +382,7 @@
 
     if (entradasEl) {
       if (entradasDeCancion.length === 0) {
-        entradasEl.innerHTML = '<p class="placeholder">Esta canción todavía no tiene entradas del glosario. <a href="proponer.html">¿Querés proponer una?</a></p>';
+        entradasEl.innerHTML = '<p class="placeholder">Algo te late, y no es tu corazón. Esta canción todavía no tiene entradas del glosario. <a href="proponer.html">¿Querés proponer una?</a></p>';
       } else {
         entradasEl.innerHTML = '<h3>Todas las entradas del glosario en esta canción (' + entradasDeCancion.length + ')</h3>' +
           '<div class="entradas-grid">' + entradasDeCancion.map(cardEntradaHtml).join("") + '</div>';
