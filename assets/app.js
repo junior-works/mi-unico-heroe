@@ -139,7 +139,7 @@
         return true;
       });
       if (contador) contador.textContent = lista.length + " entrada" + (lista.length === 1 ? "" : "s");
-      if (lista.length === 0) { cont.innerHTML = '<p style="opacity:.7;">Cuando la noche es más oscura, se viene el día en tu corazón. — Probá quitar algún filtro.</p>'; return; }
+      if (lista.length === 0) { cont.innerHTML = '<p style="opacity:.7;">Sin resultados con esos filtros.</p>'; return; }
       cont.innerHTML = lista.map(cardEntradaHtml).join("");
       cont.querySelectorAll(".entrada-card").forEach(a => {
         a.addEventListener("click", (ev) => {
