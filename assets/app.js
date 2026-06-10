@@ -483,3 +483,21 @@
     slugify: slugify
   };
 })();
+
+// Service Worker: registro + auto-update agresivo
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/mi-unico-heroe/service-worker.js')
+      .then(reg => {
+        reg.update();
+        setInterval(() => reg.update(), 60 * 60 * 1000);
+      })
+      .catch(err => console.error('SW register error:', err));
+  });
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return;
+    refreshing = true;
+    window.location.reload();
+  });
+}
